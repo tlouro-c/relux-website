@@ -1,14 +1,8 @@
+import LenisProvider from '@/components/LenisProvider'
 import React from 'react'
-
-import { HeaderThemeProvider } from './HeaderTheme'
-import { ThemeProvider } from './Theme'
 
 export const Providers: React.FC<{
   children: React.ReactNode
 }> = ({ children }) => {
-  return (
-    <ThemeProvider>
-      <HeaderThemeProvider>{children}</HeaderThemeProvider>
-    </ThemeProvider>
-  )
+  return <LenisProvider>{children}</LenisProvider>
 }
