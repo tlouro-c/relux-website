@@ -32,7 +32,7 @@ const nextConfig = {
 
     return webpackConfig
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   redirects,
 }
 

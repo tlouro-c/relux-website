@@ -96,6 +96,18 @@
   width: fit-content;
 }
 
+.testimonials-carousel-track {
+  display: flex;
+  animation: infinite-scroll 30s linear infinite;
+  width: fit-content;
+}
+
+.values-carousel-track {
+  display: flex;
+  animation: infinite-scroll 30s linear infinite;
+  width: fit-content;
+}
+
 @keyframes infinite-scroll {
   0% {
     transform: translateX(0);

@@ -1,15 +1,12 @@
-'use client'
-
+import { animate, inView } from 'motion'
 import { useEffect } from 'react'
 import SplitType from 'split-type'
-import { animate, inView } from 'motion'
-import { usePathname } from 'next/navigation'
 
-export default function LineSplitInit() {
-  const pathname = usePathname()
-
+export default function LineSplitWithRetrigger({ retriggerKey }: { retriggerKey: number }) {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>('.line-split-animation'))
+    const els = Array.from(
+      document.querySelectorAll<HTMLElement>('.line-split-animation-with-retrigger'),
+    )
 
     els.forEach((el) => {
       // Split into lines first
@@ -58,7 +55,7 @@ export default function LineSplitInit() {
         })
       })
     })
-  }, [pathname])
+  }, [retriggerKey])
 
   return null
 }

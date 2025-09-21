@@ -1,6 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { unstable_cache } from 'next/cache'
+import { Property } from '@/payload-types'
 
 export const fetchDistrictsWithProperties = unstable_cache(
   async () => {
@@ -21,8 +22,8 @@ export const fetchDistrictsWithProperties = unstable_cache(
       docs: districts.docs.map((district) => ({
         ...district,
         properties: Array.isArray(district.properties)
-          ? district.properties.slice(0, 3)
-          : district.properties,
+          ? district.properties.slice(0, 3) as Property[]
+          : null,
       })),
     }
   },

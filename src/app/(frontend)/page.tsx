@@ -1,3 +1,4 @@
+import CtaSection from '@/components/HomePage/TestimonialsSection'
 import Hero from '@/components/HomePage/Hero'
 import InstagramSection from '@/components/HomePage/IntagramSection'
 import LocationsSection from '@/components/HomePage/LocationsSection'
@@ -6,7 +7,7 @@ import MissionSection from '@/components/HomePage/MissionSection'
 import PageLoader from '@/components/HomePage/PageLoader'
 import ServicesSection from '@/components/HomePage/ServicesSection'
 import React from 'react'
-import { M } from 'vitest/dist/chunks/reporters.d.DL9pg5DB.js'
+import { LenisScrollReset } from '@/components/LenisProvider'
 
 export default function Homepage() {
   return (
@@ -23,6 +24,7 @@ export default function Homepage() {
         <LocationsSection />
         <MissionSection />
         <ServicesSection />
+        <CtaSection />
         <InstagramSection />
       </div>
     </>

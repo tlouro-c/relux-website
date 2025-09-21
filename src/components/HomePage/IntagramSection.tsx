@@ -39,7 +39,7 @@ export default function InstagramSection() {
       <Container>
         <header className="flex justify-between items-center mb-16">
           <div>
-            <p className="section-badge">Instagram</p>
+            <p className="section-badge line-split-animation">Instagram</p>
             <h2 className="section-title line-split-animation">Acompanhe-nos pelo Instagram</h2>
           </div>
           <ElementRevealFromBottom delay={0.1}>
@@ -48,7 +48,6 @@ export default function InstagramSection() {
               target="_blank"
               rel="noopener noreferrer"
               variant={'accent'}
-              size={'sm'}
             >
               @reluxportugal <MoveUpRightIcon />
             </Button>

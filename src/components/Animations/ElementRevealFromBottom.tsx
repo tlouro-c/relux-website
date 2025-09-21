@@ -6,9 +6,11 @@ import { motion } from 'motion/react'
 export default function ElementRevealFromBottom({
   children,
   delay,
+  once = true,
 }: {
   children: React.ReactNode
   delay?: number
+  once?: boolean
 }) {
   return (
     <div className="overflow-hidden">
@@ -24,7 +26,7 @@ export default function ElementRevealFromBottom({
           delay: delay || 0,
           ease: [0.645, 0.045, 0.355, 1],
         }}
-        viewport={{ once: true }}
+        viewport={{ once }}
       >
         {children}
       </motion.div>

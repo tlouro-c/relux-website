@@ -51,7 +51,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       <div className="flex-1 flex justify-end items-center">
         <ElementRevealFromBottom delay={initialDelay + 0.2 + navItems.length * 0.1}>
           <Button variant={'secondary'}>
-            Contactar um Consultor <CircleIcon className="size-1.5 fill-current" />
+            Entrar em Contacto <CircleIcon className="size-2 stroke-none fill-current" />
           </Button>
         </ElementRevealFromBottom>
       </div>

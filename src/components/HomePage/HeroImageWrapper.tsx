@@ -12,7 +12,7 @@ export default function HeroImageWrapper({ children }: { children: React.ReactNo
   const opacity = useTransform(scrollY, [0, 400], [0.45, 0.8])
 
   return (
-    <div ref={target}>
+    <div ref={target} style={{ position: 'absolute', left: 0 }} className="h-full w-full">
       {children}
       <motion.div className="bg-black absolute inset-0" style={{ opacity }} />
     </div>

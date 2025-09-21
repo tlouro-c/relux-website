@@ -14,7 +14,7 @@ export default function PropertyImageCarousel({ images, title }: PropertyImageCa
 
   const validImages = images?.filter((img) => img?.imageUrl) || []
 
-const nextImage = (e: React.MouseEvent) => {
+  const nextImage = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
     setCurrentImageIndex((prev) => (prev + 1) % validImages.length)
@@ -35,8 +35,10 @@ const nextImage = (e: React.MouseEvent) => {
       <Image
         src={validImages[currentImageIndex]?.imageUrl!}
         alt={title}
-        fill
-        className="object-cover transition-transform duration-300"
+        height={0}
+        width={0}
+        sizes="100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw"
+        className="object-cover transition-transform duration-300 h-full w-full"
       />
 
       {/* Preload next and previous images */}
@@ -46,17 +48,25 @@ const nextImage = (e: React.MouseEvent) => {
             <Image
               src={validImages[(currentImageIndex + 1) % validImages.length]?.imageUrl!}
               alt={`${title} - next`}
-              fill
-              className="object-cover opacity-0 pointer-events-none"
+              height={0}
+              width={0}
+              sizes="100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw"
+              className="object-cover opacity-0 pointer-events-none h-full w-full"
               priority={false}
             />
           )}
-          {validImages[(currentImageIndex - 1 + validImages.length) % validImages.length]?.imageUrl && (
+          {validImages[(currentImageIndex - 1 + validImages.length) % validImages.length]
+            ?.imageUrl && (
             <Image
-              src={validImages[(currentImageIndex - 1 + validImages.length) % validImages.length]?.imageUrl!}
+              src={
+                validImages[(currentImageIndex - 1 + validImages.length) % validImages.length]
+                  ?.imageUrl!
+              }
+              height={0}
+              width={0}
               alt={`${title} - previous`}
-              fill
-              className="object-cover opacity-0 pointer-events-none"
+              sizes="100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 33vw"
+              className="object-cover opacity-0 pointer-events-none h-full w-full"
               priority={false}
             />
           )}
@@ -80,7 +90,7 @@ const nextImage = (e: React.MouseEvent) => {
           </button>
 
           {/* Dots indicator */}
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 opacity-0 group-hover/image:opacity-100 transition-opacity duration-200">
+          <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 flex gap-1.5 opacity-0 group-hover/image:opacity-100 transition-opacity duration-200">
             {validImages.map((_, index) => (
               <button
                 key={index}

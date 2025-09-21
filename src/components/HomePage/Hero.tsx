@@ -13,7 +13,7 @@ export default function Hero() {
         <Container className="!max-w-none sticky top-0 h-[100svh] overflow-hidden">
           <HeroImageWrapper>
             <Image
-              className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+              className="w-full h-full object-cover object-center pointer-events-none"
               src="/images/hero-imovel-agencia-imobiliaria.png"
               alt="Imóvel - Agência Imobiliária"
               width={0}

@@ -115,6 +115,7 @@ export const Properties: CollectionConfig<'properties'> = {
               label: 'Área Útil',
               name: 'usableArea',
               type: 'text',
+              defaultValue: 0,
             },
             {
               label: 'Área Bruta',
@@ -130,16 +131,19 @@ export const Properties: CollectionConfig<'properties'> = {
               label: 'Quartos',
               name: 'bedrooms',
               type: 'number',
+              defaultValue: 0,
             },
             {
               label: 'Garagens',
               name: 'garages',
               type: 'number',
+              defaultValue: 0,
             },
             {
               label: 'Casas de Banho',
               name: 'wc',
               type: 'number',
+              defaultValue: 0,
             },
             {
               label: 'Ano de Construção',

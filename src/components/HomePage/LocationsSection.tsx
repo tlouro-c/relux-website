@@ -2,8 +2,7 @@ import React from 'react'
 import Container from '../Container'
 import LocationSectionButton from './LocationSectionButton'
 import { fetchDistrictsWithProperties } from '@/collections/Districts/utils/dataFetching'
-import PropertyCard from '../Property/PropertyCard'
-import { Consultant, Property } from '@/payload-types'
+import LocationsGrid from './LocationsGrid'
 
 export default async function LocationsSection() {
   const districts = await fetchDistrictsWithProperties()
@@ -11,16 +10,14 @@ export default async function LocationsSection() {
   return (
     <section className="py-20">
       <Container>
-        <header className="flex justify-between items-center mb-16">
-          <div>
-            <p className="section-badge line-split-animation text-accent">Localizações</p>
-            <h2 className="section-title line-split-animation">A Localização Ideal Para Si</h2>
-          </div>
+        <header className="mb-16">
+          <p className="section-badge line-split-animation text-accent">Localizações</p>
+          <h2 className="section-title line-split-animation">A Localização Ideal Para Si</h2>
         </header>
-        <div className="flex">
+        <div className="flex gap-4">
           <div className="flex-1">
-            <nav>
-              <ul>
+            <nav className="h-full">
+              <ul className="flex flex-col h-full">
                 {districts.docs.map((district) => (
                   <LocationSectionButton key={district.id} index={1} location={district.name}>
                     {district.name}
@@ -29,16 +26,8 @@ export default async function LocationsSection() {
               </ul>
             </nav>
           </div>
-          <div className="flex-[2]">
-            {districts.docs[0].properties
-              ?.filter((property): property is Property => typeof property === 'object')
-              .map((property) => (
-                <PropertyCard
-                  key={property.id}
-                  property={property}
-                  consultant={property.consultant as Consultant}
-                />
-              ))}
+          <div className="flex-[3]">
+            <LocationsGrid districts={districts.docs} />
           </div>
         </div>
       </Container>
