@@ -37,8 +37,8 @@ export default function InstagramSection() {
   return (
     <section className="py-20 overflow-hidden">
       <Container>
-        <header className="flex justify-between items-center mb-16">
-          <div>
+        <header className="flex flex-col md:flex-row justify-between items-center mb-16">
+          <div className='mb-4 md:mb-0'>
             <p className="section-badge line-split-animation">Instagram</p>
             <h2 className="section-title line-split-animation">Acompanhe-nos pelo Instagram</h2>
           </div>
@@ -68,7 +68,7 @@ export default function InstagramSection() {
 
 function InstagramPost({ src, alt, href }: { src: string; alt: string; href: string }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="block min-w-[300px] px-4">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="block min-w-[200px] md:min-w-[300px] px-4">
       <div className="shrink-0 aspect-[3/4] w-full overflow-hidden rounded-lg bg-foreground">
         <Image
           src={src}

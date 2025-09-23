@@ -10,11 +10,11 @@ export default async function LocationsSection() {
   return (
     <section className="py-20">
       <Container>
-        <header className="mb-16">
+        <header className="mb-16 flex flex-col items-center md:items-start">
           <p className="section-badge line-split-animation text-accent">Localizações</p>
           <h2 className="section-title line-split-animation">A Localização Ideal Para Si</h2>
         </header>
-        <div className="flex gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <nav className="h-full">
               <ul className="flex flex-col h-full">

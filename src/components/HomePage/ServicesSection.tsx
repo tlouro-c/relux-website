@@ -49,7 +49,7 @@ export default function ServicesSection() {
   return (
     <section>
       <LineSplitWithRetrigger retriggerKey={activeIndex} />
-      <Container className="relative flex">
+      <Container className="relative flex flex-col md:flex-row">
         <div
           ref={target}
           style={{ height: `calc(${services.length * 200}svh)` }}
@@ -62,14 +62,14 @@ export default function ServicesSection() {
               </ElementRevealFromBottom>
               <p
                 data-delay={0.1}
-                className="line-split-animation-with-retrigger text-xl leading-relaxed tracking-tight text-balance max-w-sm"
+                className="line-split-animation-with-retrigger text-xl leading-relaxed tracking-tight max-w-sm"
               >
                 {services[activeIndex].description}
               </p>
             </motion.div>
           </div>
         </div>
-        <div className="flex-[2] ps-8 h-svh sticky top-0 flex flex-col justify-center">
+        <div className="flex-[2] ps-8 h-svh hidden sticky top-0 md:flex flex-col justify-center">
           <h2 className="text-right section-badge text-accent line-split-animation">Serviços</h2>
           <ul className="flex flex-col mt-8">
             {services.map((service, index) => (
@@ -79,7 +79,7 @@ export default function ServicesSection() {
                     transition: 'color 1.2s cubic-bezier(0.645, 0.045, 0.355, 1)',
                   }}
                   data-delay={0.1}
-                  className={`tracking-tight highlight text-7xl leading-relaxed transition-colors line-split-animation ${activeIndex === index ? 'text-foreground' : 'text-secondary'}`}
+                  className={`tracking-tight highlight text-3xl md:text-7xl leading-relaxed transition-colors line-split-animation ${activeIndex === index ? 'text-foreground' : 'text-secondary'}`}
                 >
                   {service.title}
                 </h3>

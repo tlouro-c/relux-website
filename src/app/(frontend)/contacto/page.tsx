@@ -26,6 +26,8 @@ export default async function Contacto() {
           height={0}
           width={0}
           className="object-cover w-full h-full absolute inset-0"
+          priority
+          decoding='sync'
         />
         <div className="w-full h-full absolute inset-0 z-[1]" />
       </div>

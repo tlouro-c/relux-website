@@ -10,6 +10,7 @@ export default function LineSplitInit() {
 
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>('.line-split-animation'))
+    const splits: SplitType[] = []
 
     els.forEach((el) => {
       // Split into lines first
@@ -18,7 +19,8 @@ export default function LineSplitInit() {
         lineClass: 'line-child',
         tagName: 'span',
       })
-      const lines = split.lines ?? []
+      splits.push(split)
+      const lines = split.lines || []
 
       const delay = el.dataset.delay ? parseFloat(el.dataset.delay) : 0
 
@@ -58,6 +60,12 @@ export default function LineSplitInit() {
         })
       })
     })
+
+    return () => {
+      splits.forEach((split) => {
+        split.revert()
+      })
+    }
   }, [pathname])
 
   return null

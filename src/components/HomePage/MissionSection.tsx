@@ -9,12 +9,11 @@ export default function MissionSection() {
     <section className="py-20 bg-foreground relative overflow-hidden">
       <Container className="text-background">
         <div className="max-w-4xl">
-          <h2 className="section-badge text-center line-split-animation">Missão</h2>
-          <p className="text-3xl text-center text-balance leading-relaxed font-medium tracking-tight line-split-animation">
-            Na Relux, acreditamos que o imobiliário em Portugal merece mais. Unimos{' '}
-            <span className="bg-accent mb-1">investimento imobiliário estratégico</span> e{' '}
-            <span className="bg-accent mt-1">consultoria de imóveis inovadora</span> , criando uma
-            história marcada por transparência, confiança e elegância em cada detalhe.
+          <h2 className="section-badge text-left line-split-animation mb-2">Missão</h2>
+          <p className="text-lg md:text-3xl text-left !leading-relaxed hyphens-auto break-words font-medium tracking-tighter line-split-animation">
+            Na Relux, acreditamos que o imobiliário em Portugal merece mais. Unimos investimento
+            imobiliário estratégico e consultoria de imóveis inovadora, criando uma história marcada
+            por transparência, confiança e elegância em cada detalhe.
           </p>
         </div>
         <div className="mt-48 flex ">
@@ -59,7 +58,7 @@ export default function MissionSection() {
       <ElementFadeIn
         delay={0.2}
         style={{ perspective: '1200px' }}
-        className="absolute top-0 right-0 z-0 pointer-events-none h-full w-[800px] translate-x-1/4 scale-90"
+        className="hidden md:block absolute top-0 right-0 z-0 pointer-events-none h-full w-[800px] translate-x-1/4 scale-90"
       >
         <Image
           src={'/images/location-map.svg'}

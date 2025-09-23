@@ -8,7 +8,7 @@ export default function MetricsSection() {
       <Container>
         <h2 className="sr-only">Métricas</h2>
 
-        <div className="grid grid-cols-3 gap-4 mx-auto w-fit">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto w-fit">
           <MetricCard
             value="70+"
             description="Projetos Concluídos"

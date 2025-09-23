@@ -27,7 +27,7 @@ export default function Hero() {
             <div className="flex-1 flex flex-col md:justify-center py-20">
               <h1
                 data-delay={initialDelay}
-                className="text-4xl md:text-6xl max-w-4xl mb-8 font-medium tracking-tight line-split-animation text-balance"
+                className="text-4xl md:text-6xl max-w-3xl mb-8 font-medium tracking-tight line-split-animation text-balance"
               >
                 <span className="highlight">Unimos</span> Pessoas,{' '}
                 <span className="highlight">Concretizamos</span> Sonhos.

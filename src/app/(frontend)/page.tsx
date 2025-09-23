@@ -8,6 +8,7 @@ import PageLoader from '@/components/HomePage/PageLoader'
 import ServicesSection from '@/components/HomePage/ServicesSection'
 import React from 'react'
 import { LenisScrollReset } from '@/components/LenisProvider'
+import TestimonialsSection from '@/components/HomePage/TestimonialsSection'
 
 export default function Homepage() {
   return (
@@ -24,7 +25,7 @@ export default function Homepage() {
         <LocationsSection />
         <MissionSection />
         <ServicesSection />
-        <CtaSection />
+        <TestimonialsSection />
         <InstagramSection />
       </div>
     </>

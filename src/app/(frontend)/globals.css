@@ -64,11 +64,11 @@
 
 @layer components {
   .section-badge {
-    @apply highlight text-sm mb-1;
+    @apply text-center md:text-left highlight text-sm mb-1;
   }
 
   .section-title {
-    @apply text-4xl font-semibold max-w-xs text-balance mb-2 leading-tight;
+    @apply text-center md:text-left text-2xl md:text-4xl font-semibold max-w-[256px] md:max-w-xs text-balance mb-2 leading-tight;
   }
 }
 
@@ -84,6 +84,7 @@
   overflow: hidden;
   display: block;
   opacity: 0;
+  text-wrap: wrap;
 }
 
 .line-split-animation .line {
