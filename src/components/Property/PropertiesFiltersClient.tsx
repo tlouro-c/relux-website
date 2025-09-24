@@ -65,7 +65,7 @@ export const SortSelect = memo(function SortSelect({ sortOptions }: { sortOption
     <select
       value={searchParams.get('ordenar') || 'maisRecentes'}
       onChange={handleChange}
-      className="text-xs bg-transparent w-32 line-clamp-1 text-muted-foreground hover:text-foreground border border-accent/20 rounded px-2 py-1 outline-none"
+      className="text-xs bg-transparent w-full md:w-32 line-clamp-1 text-muted-foreground hover:text-foreground border border-accent/20 rounded px-2 py-1 outline-none"
     >
       {sortOptions.map((option) => (
         <option key={option.value} value={option.value} className="bg-background text-foreground">

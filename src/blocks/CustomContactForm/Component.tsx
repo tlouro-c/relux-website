@@ -39,7 +39,6 @@ interface FormData {
   name?: string
   email?: string
   phone?: string
-  whatsappEnabled?: boolean
   preferredContactMethod?: ContactMethod
   message?: string
   acceptPrivacy?: boolean
@@ -92,7 +91,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
     ]
 
     if (data.phone) {
-      summary.push(`Telefone: ${data.phone}${data.whatsappEnabled ? ' (WhatsApp)' : ''}`)
+      summary.push(`Telefone: ${data.phone}`)
     }
 
     if (data.preferredContactMethod) {
@@ -101,7 +100,9 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
 
     summary.push('', '=== INTERESSE ===')
     summary.push(`Tipo: ${data.intent ? intentLabels[data.intent] : 'Não especificado'}`)
-    summary.push(`Cronograma: ${data.timeline ? timelineLabels[data.timeline] : 'Não especificado'}`)
+    summary.push(
+      `Cronograma: ${data.timeline ? timelineLabels[data.timeline] : 'Não especificado'}`,
+    )
 
     if (data.intent === 'buying') {
       summary.push('', '=== COMPRA ===')
@@ -142,8 +143,6 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
   }
 
   const nextStep = () => {
-    console.log(currentStep)
-    console.log(formData.intent)
     if (currentStep === 1 && formData.intent !== 'buying' && formData.intent !== 'selling') {
       setCurrentStep((prev) => prev + 2)
     } else {
@@ -182,7 +181,6 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
       { field: 'name', value: formData.name },
       { field: 'email', value: formData.email },
       { field: 'phone', value: formData.phone },
-      { field: 'whatsappEnabled', value: formData.whatsappEnabled },
       { field: 'preferredContactMethod', value: formData.preferredContactMethod },
       { field: 'message', value: formData.message || defaultMessage },
       { field: 'acceptPrivacy', value: formData.acceptPrivacy },
@@ -219,7 +217,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
 
   if (hasSubmitted) {
     return (
-      <motion.div className="text-center max-w-lg mx-auto flex flex-col min-h-[calc(100svh-var(--header-height))] justify-center">
+      <motion.div className="text-center max-w-lg ps-4 pe-4 md:pe-0 md:ps-6 mx-auto flex flex-col min-h-[calc(100svh-var(--header-height)-16px)] md:min-h-[calc(100svh-var(--header-height))] justify-center">
         <h2 className="highlight text-sm mb-4 text-balance">Obrigado!</h2>
         <p className="text-lg tracking-tight text-balance">
           Recebemos a sua informação e entraremos em contacto em breve.
@@ -230,7 +228,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
 
   if (isLoading) {
     return (
-      <motion.div className="text-center max-w-lg mx-auto flex flex-col min-h-[calc(100svh-var(--header-height))] justify-center">
+      <motion.div className="text-center max-w-lg ps-4 pe-4 md:pe-0 md:ps-6 mx-auto flex flex-col min-h-[calc(100svh-var(--header-height)-16px)] md:min-h-[calc(100svh-var(--header-height))] justify-center">
         <p className="text-lg tracking-tight text-balance">A enviar a sua informação...</p>
       </motion.div>
     )
@@ -238,9 +236,13 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
 
   if (error) {
     return (
-      <motion.div className="text-center max-w-lg mx-auto space-y-6 flex flex-col min-h-[calc(100svh-var(--header-height))] justify-center">
+      <motion.div className="text-center max-w-lg mx-auto ps-4 pe-4 md:pe-0 md:ps-6 space-y-6 flex flex-col min-h-[calc(100svh-var(--header-height)-16px)] md:min-h-[calc(100svh-var(--header-height))] justify-center">
         <p className="text-lg tracking-tight text-balance text-red-600">Erro: {error}</p>
-        <Button onClick={() => setError(undefined)} size="sm">
+        <Button
+          onClick={() => setError(undefined)}
+          size="sm"
+          className="md:px-6 text-xs md:text-sm"
+        >
           Tentar Novamente
         </Button>
       </motion.div>
@@ -248,9 +250,9 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto ps-4 md:ps-6 flex flex-col min-h-[calc(100svh-var(--header-height))] pb-6">
+    <div className="max-w-2xl mx-auto ps-4 pe-4 md:pe-0 md:ps-6 flex flex-col min-h-[calc(100svh-var(--header-height)-16px)] md:min-h-[calc(100svh-var(--header-height))] pb-6">
       {/* Step Indicator */}
-      <div className="mb-8">
+      <div className="mb-6 md:mb-8">
         <div className="flex items-center justify-center gap-2 mb-2">
           {steps.map((step) => (
             <motion.div
@@ -279,9 +281,9 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="space-y-8 flex-1 flex flex-col"
+            className="space-y-6 md:space-y-8 flex-1 flex flex-col"
           >
-            <div className="space-y-8 flex-1 flex flex-col">
+            <div className="space-y-6 md:space-y-8 flex-1 flex flex-col">
               <div>
                 <label className={labelStyle}>
                   Estou interessado em <span className="text-red-600">*</span>
@@ -299,7 +301,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                       size={'sm'}
                       variant={'link'}
                       onClick={() => updateFormData({ intent: option.value as Intent })}
-                      className={`transition-all duration-300 rounded-lg ${
+                      className={`transition-all duration-300 rounded-lg md:px-6 text-xs md:text-sm ${
                         formData.intent === option.value
                           ? 'bg-foreground text-background'
                           : 'bg-secondary text-foreground'
@@ -327,7 +329,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                       size={'sm'}
                       type="button"
                       onClick={() => updateFormData({ timeline: option.value as Timeline })}
-                      className={`transition-all duration-300 rounded-lg ${
+                      className={`transition-all duration-300 rounded-lg md:px-6 text-xs md:text-sm ${
                         formData.timeline === option.value
                           ? 'bg-foreground text-background'
                           : 'bg-secondary text-foreground'
@@ -359,9 +361,9 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="space-y-8 flex-1 flex flex-col"
+            className="space-y-6 md:space-y-8 flex-1 flex flex-col"
           >
-            <div className="space-y-8 flex-1 flex flex-col">
+            <div className="space-y-6 md:space-y-8 flex-1 flex flex-col">
               {formData.intent === 'buying' && (
                 <>
                   <div>
@@ -380,7 +382,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                           onClick={() =>
                             updateFormData({ budgetRange: option.value as BudgetRange })
                           }
-                          className={`transition-all duration-300 rounded-lg ${
+                          className={`transition-all duration-300 rounded-lg md:px-6 text-xs md:text-sm ${
                             formData.budgetRange === option.value
                               ? 'bg-foreground text-background'
                               : 'bg-secondary text-foreground'
@@ -399,7 +401,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                     <input
                       type="text"
                       placeholder="ex: Lisboa, Porto..."
-                      className="w-full bg-transparent border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
+                      className="w-full bg-transparent rounded-none border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
                       value={formData.preferredLocations?.join(', ') || ''}
                       onChange={(e) =>
                         updateFormData({
@@ -418,7 +420,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                     <input
                       type="text"
                       placeholder="ex: Lisboa, Rua..."
-                      className="w-full bg-transparent border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
+                      className="w-full bg-transparent rounded-none border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
                       value={formData.propertyLocation || ''}
                       onChange={(e) => updateFormData({ propertyLocation: e.target.value })}
                     />
@@ -429,7 +431,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                     <input
                       type="text"
                       placeholder="120"
-                      className="w-full bg-transparent border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
+                      className="w-full bg-transparent rounded-none border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
                       value={formData.propertySize || ''}
                       onChange={(e) => updateFormData({ propertySize: e.target.value })}
                     />
@@ -440,7 +442,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                     <input
                       type="text"
                       placeholder="€350.000"
-                      className="w-full bg-transparent border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
+                      className="w-full bg-transparent rounded-none border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
                       value={formData.estimatedValue || ''}
                       onChange={(e) => updateFormData({ estimatedValue: e.target.value })}
                     />
@@ -474,9 +476,9 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="space-y-8 flex-1 flex flex-col"
+            className="space-y-6 md:space-y-8 flex-1 flex flex-col"
           >
-            <div className="space-y-8 flex-1 flex flex-col">
+            <div className="space-y-6 md:space-y-8 flex-1 flex flex-col">
               <div>
                 <label className={labelStyle}>
                   Nome <span className="text-red-600">*</span>
@@ -484,7 +486,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                 <input
                   type="text"
                   placeholder="João Silva"
-                  className="w-full bg-transparent border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
+                  className="w-full bg-transparent rounded-none border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
                   value={formData.name || ''}
                   onChange={(e) => updateFormData({ name: e.target.value })}
                 />
@@ -498,7 +500,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                   <input
                     type="email"
                     placeholder="joao@exemplo.com"
-                    className="w-full bg-transparent border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
+                    className="w-full bg-transparent rounded-none border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
                     value={formData.email || ''}
                     onChange={(e) => updateFormData({ email: e.target.value })}
                   />
@@ -509,21 +511,10 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                   <input
                     type="tel"
                     placeholder="+351 912 345 678"
-                    className="w-full bg-transparent border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
+                    className="w-full bg-transparent rounded-none border-b border-foreground/20 pb-2 outline-none focus:border-foreground/60 transition-colors duration-300"
                     value={formData.phone || ''}
                     onChange={(e) => updateFormData({ phone: e.target.value })}
                   />
-                  <div className="mt-3">
-                    <label className={labelStyle}>
-                      <input
-                        type="checkbox"
-                        checked={formData.whatsappEnabled || false}
-                        onChange={(e) => updateFormData({ whatsappEnabled: e.target.checked })}
-                        className="mr-2"
-                      />
-                      Este número tem WhatsApp
-                    </label>
-                  </div>
                 </div>
               </div>
 
@@ -542,7 +533,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                       onClick={() =>
                         updateFormData({ preferredContactMethod: option.value as ContactMethod })
                       }
-                      className={`transition-all duration-300 rounded-lg ${
+                      className={`transition-all duration-300 rounded-lg px-4 md:px-6 text-xs md:text-sm ${
                         formData.preferredContactMethod === option.value
                           ? 'bg-foreground text-background'
                           : 'bg-secondary text-foreground'
@@ -565,7 +556,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
               </div>
             </div>
 
-            <div className="flex gap-4 justify-end mt-auto">
+            <div className="flex flex-col md:flex-row gap-2 justify-end mt-auto">
               <div className="me-auto">
                 <label className={labelStyle}>
                   <input
@@ -580,16 +571,18 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({ formId }) => {
                   </span>
                 </label>
               </div>
-              <Button onClick={prevStep} variant="ghost" size="sm">
-                <ArrowLeftIcon /> Voltar
-              </Button>
-              <Button
-                onClick={submitForm}
-                disabled={!formData.name || !formData.email || !formData.acceptPrivacy}
-                size="sm"
-              >
-                Enviar <SendHorizontalIcon />
-              </Button>
+              <div className="flex gap-4 justify-end">
+                <Button onClick={prevStep} variant="ghost" size="sm">
+                  <ArrowLeftIcon /> Voltar
+                </Button>
+                <Button
+                  onClick={submitForm}
+                  disabled={!formData.name || !formData.email || !formData.acceptPrivacy}
+                  size="sm"
+                >
+                  Enviar <SendHorizontalIcon />
+                </Button>
+              </div>
             </div>
           </motion.div>
         )}

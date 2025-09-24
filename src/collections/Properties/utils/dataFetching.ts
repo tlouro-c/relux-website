@@ -32,7 +32,7 @@ export const fetchProperties = unstable_cache(
     location: string = '',
     minBedrooms: number = -1,
     minWc: number = -1,
-    minGarage: number = -1,
+    minParkingSpaces: number = -1,
     sort: SortOptionsType = 'maisRecentes',
     page: number = 1,
   ) => {
@@ -87,8 +87,8 @@ export const fetchProperties = unstable_cache(
       where.wc = { greater_than_equal: minWc }
     }
 
-    if (minGarage >= 0) {
-      where.garages = { greater_than_equal: minGarage }
+    if (minParkingSpaces >= 0) {
+      where.parkingSpaces = { greater_than_equal: minParkingSpaces }
     }
 
     let sortOption = '-createdAt' // Default sort

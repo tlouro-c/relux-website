@@ -5,7 +5,7 @@ import HeroForm from './HeroForm'
 import HeroImageWrapper from './HeroImageWrapper'
 
 export default function Hero() {
-  const initialDelay = 0.6
+  const initialDelay = 0.2
 
   return (
     <>
@@ -13,7 +13,7 @@ export default function Hero() {
         <Container className="!max-w-none sticky top-0 h-[100svh] overflow-hidden">
           <HeroImageWrapper>
             <Image
-              className="w-full h-full object-cover object-center pointer-events-none"
+              className="w-full h-full object-cover object-center pointer-events-none contrast-[1.1] brightness-75"
               src="/images/hero-imovel-agencia-imobiliaria.png"
               alt="Imóvel - Agência Imobiliária"
               width={0}
@@ -34,10 +34,10 @@ export default function Hero() {
               </h1>
               <HeroForm />
             </div>
-            <div className="justify-end items-end hidden md:flex">
+            <div className="items-end flex">
               <p
-                data-delay={initialDelay + 0.4}
-                className="max-w-lg w-full text-2xl line-split-animation leading-relaxed font-medium text-balance"
+                data-delay={initialDelay}
+                className="max-w-[256px] md:max-w-md w-full md:text-xl tracking-tight line-split-animation font-medium"
               >
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                 incididunt ut labore et dolore magna aliqua.

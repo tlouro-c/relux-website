@@ -6,6 +6,7 @@ import { Form } from '@/payload-types'
 import Container from '@/components/Container'
 import Image from 'next/image'
 import { MultiStepForm } from '@/blocks/CustomContactForm/Component'
+import Logo3D from '@/components/Animations/Logo3D'
 
 export default async function Contacto() {
   const payload = await getPayload({ config })
@@ -17,8 +18,8 @@ export default async function Contacto() {
   if (!form) return null
 
   return (
-    <section className="pt-[var(--header-height)] min-h-svh mb-20">
-      <div className="absolute left-0 top-[var(--header-height)] w-1/2 h-[calc(100vh-var(--header-height))] flex items-center justify-center">
+    <section className="pt-[calc(var(--header-height)+16px)] md:pt-[var(--header-height)] min-h-svh mb-20">
+      <div className="hidden md:flex absolute left-0 top-[var(--header-height)] w-1/2 h-[calc(100vh-var(--header-height))] items-center justify-center">
         <Image
           src={'/images/contact/contacto-relux.png'}
           alt={''}
@@ -27,12 +28,13 @@ export default async function Contacto() {
           width={0}
           className="object-cover w-full h-full absolute inset-0"
           priority
-          decoding='sync'
+          decoding="sync"
         />
-        <div className="w-full h-full absolute inset-0 z-[1]" />
+        <div className="w-full h-full absolute inset-0 z-[1] bg-black/20" />
+        <Logo3D />
       </div>
       <Container className="flex">
-        <div className="flex-1" />
+        <div className="hidden md:block flex-1" />
         <div className="flex-1">
           <MultiStepForm formId={form.id} />
         </div>

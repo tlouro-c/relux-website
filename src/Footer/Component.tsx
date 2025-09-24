@@ -18,7 +18,7 @@ export async function Footer() {
       <Container className="max-w-none flex flex-col-reverse md:flex-row justify-between gap-8 mb-8 md:mb-16">
         <div>
           <Link className="flex items-center mb-4" href="/#">
-            <ReluxIcon className="size-16" colorVariant={1} />
+            <ReluxIcon className="size-16" />
           </Link>
           <div className="flex flex-col gap-1 text-sm tracking-tight">
             <div className="flex items-center gap-2">

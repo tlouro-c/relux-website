@@ -29,10 +29,10 @@ export const garageOptions = [
 
 export const sortOptions = [
   { value: 'maisRecentes', label: 'Mais Recentes' },
-  { value: 'precoAsc', label: 'Preço: Menor ⟶ Maior' },
-  { value: 'precoDesc', label: 'Preço: Maior ⟶ Menor' },
-  { value: 'areaAsc', label: 'Área: Menor ⟶ Maior' },
-  { value: 'areaDesc', label: 'Área: Maior ⟶ Menor' },
+  { value: 'precoAsc', label: 'Preço Crescente' },
+  { value: 'precoDesc', label: 'Preço Decrescente' },
+  { value: 'areaAsc', label: 'Área Crescente' },
+  { value: 'areaDesc', label: 'Área Decrescente' },
 ]
 
 type Params = Promise<{ slug?: string[] }>

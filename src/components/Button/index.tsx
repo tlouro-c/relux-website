@@ -34,23 +34,32 @@ export type ButtonProps = {
   size?: VariantProps<typeof buttonVariants>['size']
   children: React.ReactNode
   href?: string
+  animate?: boolean
 } & (
   | (React.ComponentProps<'button'> & { href?: never })
   | (React.ComponentProps<'a'> & { href: string })
 )
 
-function Button({ className, variant, size, children, href, ...props }: ButtonProps) {
+function Button({
+  className,
+  variant,
+  size,
+  children,
+  href,
+  animate = true,
+  ...props
+}: ButtonProps) {
   const animatedContent = (
     <span className="overflow-hidden relative">
       <span
         className="inline-flex items-center gap-3 translate-y-0 group-hover/button:-translate-y-full origin-left rotate-0 group-hover/button:-rotate-[10deg]"
-        style={{ transition: 'transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1)' }}
+        style={{ transition: 'transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1)' }}
       >
         {children}
       </span>
       <span
         className="absolute inline-flex items-center left-1/2 -translate-x-1/2 gap-3 translate-y-full group-hover/button:translate-y-0 origin-left rotate-[10deg] group-hover/button:rotate-0"
-        style={{ transition: 'transform 600ms cubic-bezier(0.645, 0.045, 0.355, 1)' }}
+        style={{ transition: 'transform 500ms cubic-bezier(0.645, 0.045, 0.355, 1)' }}
       >
         {children}
       </span>
@@ -61,7 +70,7 @@ function Button({ className, variant, size, children, href, ...props }: ButtonPr
     const { href: _, ...linkProps } = props as React.ComponentProps<'a'> & { href?: string }
     return (
       <Link href={href} className={cn(buttonVariants({ variant, size, className }))} {...linkProps}>
-        {animatedContent}
+        {animate ? animatedContent : children}
       </Link>
     )
   }
@@ -71,7 +80,7 @@ function Button({ className, variant, size, children, href, ...props }: ButtonPr
       className={cn(buttonVariants({ variant, size, className }))}
       {...(props as React.ComponentProps<'button'>)}
     >
-      {animatedContent}
+      {animate ? animatedContent : children}
     </button>
   )
 }

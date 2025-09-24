@@ -777,7 +777,7 @@ export interface Property {
   grossArea?: string | null;
   landArea?: string | null;
   bedrooms?: number | null;
-  garages?: number | null;
+  parkingSpaces?: number | null;
   wc?: number | null;
   year?: number | null;
   energyCertificate?: string | null;
@@ -813,7 +813,6 @@ export interface Property {
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1432,7 +1431,7 @@ export interface PropertiesSelect<T extends boolean = true> {
   grossArea?: T;
   landArea?: T;
   bedrooms?: T;
-  garages?: T;
+  parkingSpaces?: T;
   wc?: T;
   year?: T;
   energyCertificate?: T;
@@ -1467,7 +1466,6 @@ export interface PropertiesSelect<T extends boolean = true> {
   slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1856,10 +1854,6 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: number | Post;
-        } | null)
-      | ({
-          relationTo: 'properties';
-          value: number | Property;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

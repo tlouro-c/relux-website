@@ -18,7 +18,7 @@ export default function MissionSection() {
         </div>
         <div className="mt-48 flex ">
           <div
-            className="w-[200px] h-[300px] parallax-animation z-10 backdrop-blur-[2px] shadow-md"
+            className="min-w-[200px] h-[300px] parallax-animation z-10 backdrop-blur-[2px] shadow-md"
             data-aggressiveness="0.5"
           >
             <Image
@@ -30,7 +30,7 @@ export default function MissionSection() {
             />
           </div>
           <div
-            className="w-[300px] h-[200px] parallax-animation -ms-12 -mt-24 backdrop-blur-[2px] shadow-md"
+            className="w-[300px] h-[200px] parallax-animation -ms-32 md:-ms-12 -mt-32 md:-mt-24 backdrop-blur-[2px] shadow-md"
             data-aggressiveness="1"
           >
             <Image
@@ -58,7 +58,7 @@ export default function MissionSection() {
       <ElementFadeIn
         delay={0.2}
         style={{ perspective: '1200px' }}
-        className="hidden md:block absolute top-0 right-0 z-0 pointer-events-none h-full w-[800px] translate-x-1/4 scale-90"
+        className="hidden brightness-[0.8] md:block absolute top-0 right-0 z-0 pointer-events-none h-full w-[800px] translate-x-1/4 scale-[0.8]"
       >
         <Image
           src={'/images/location-map.svg'}

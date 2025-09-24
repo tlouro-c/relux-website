@@ -12,24 +12,28 @@ export default function ElementRevealFromBottom({
   delay?: number
   once?: boolean
 }) {
+  const variants = {
+    hidden: { y: '120%' },
+    visible: { y: '0%' },
+  }
+
   return (
-    <div className="overflow-hidden">
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once }}
+      className="overflow-hidden"
+    >
       <motion.div
-        initial={{
-          transform: 'translateY(100%)',
-        }}
-        whileInView={{
-          transform: 'translateY(0)',
-        }}
+        variants={variants}
         transition={{
-          duration: 1.2,
+          duration: 1,
           delay: delay || 0,
           ease: [0.645, 0.045, 0.355, 1],
         }}
-        viewport={{ once }}
       >
         {children}
       </motion.div>
-    </div>
+    </motion.div>
   )
 }

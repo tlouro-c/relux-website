@@ -2,7 +2,7 @@ import { Consultant, Property } from '@/payload-types'
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-import { BathIcon, BedIcon, ExpandIcon } from 'lucide-react'
+import { BathIcon, BedIcon, CarIcon, ExpandIcon } from 'lucide-react'
 import PropertyImageCarousel from './PropertyImageCarousel'
 
 interface PropertyCardProps {
@@ -16,7 +16,7 @@ interface PropertyCardProps {
     | 'bedrooms'
     | 'wc'
     | 'usableArea'
-    | 'garages'
+    | 'parkingSpaces'
     | 'isNew'
     | 'district'
     | 'county'
@@ -47,10 +47,10 @@ export default function PropertyCard({ property }: PropertyCardProps) {
       : Number(property.usableArea)
 
   return (
-    <div className="p-12 md:p-16 border-b border-l border-accent/5 border-collapse">
+    <div className="p-4 md:p-12 lg:p-16 border-b border-l border-accent/5 border-collapse">
       <Link
         href={`/imoveis/${property.slug}`}
-        className="relative block group overflow-hidden rounded-lg min-w-64 aspect-[4/5] bg-white"
+        className="relative block group overflow-hidden rounded-lg w-full md:min-w-64 aspect-[4/5] bg-white"
       >
         <article className="h-full flex flex-col">
           {property.isNew && (
@@ -59,7 +59,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             </span>
           )}
           <PropertyImageCarousel images={property.imageUrls || []} title={property.title} />
-          <div className="pt-8 pb-6 px-6 gap-4 flex flex-col flex-1 justify-between">
+          <div className="pt-4 md:pt-8 pb-6 px-4 md:px-6 gap-4 flex flex-col flex-1 justify-between">
             <div className="">
               <div className="flex gap-3 justify-between">
                 <h2 className="text-xs">{property.title}</h2>
@@ -73,7 +73,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               )}
             </div>
             <div className="flex gap-6 items-end">
-              <div className="flex text-xs gap-2">
+              <div className="flex text-xs gap-2 flex-wrap">
                 {property.usableArea && (
                   <span className="flex items-center gap-1">
                     <ExpandIcon className="size-4" strokeWidth={1.5} /> {area} m²
@@ -89,6 +89,12 @@ export default function PropertyCard({ property }: PropertyCardProps) {
                   <span className="flex items-center gap-1">
                     <BathIcon className="size-4" strokeWidth={1.5} />
                     {property.wc}
+                  </span>
+                )}
+                {property.parkingSpaces && (
+                  <span className="flex items-center gap-1">
+                    <CarIcon className="size-4" strokeWidth={1.5} />
+                    {property.parkingSpaces}
                   </span>
                 )}
               </div>

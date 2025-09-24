@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 
 import { cn } from '@/utilities/ui'
 import React from 'react'
@@ -14,13 +14,19 @@ import { getServerSideURL } from '@/utilities/getURL'
 import { ppEiko, raleway } from '@/utilities/fonts'
 import LineSplitInit from '@/components/Animations/LineSplitInit'
 import ParallaxInit from '@/components/Animations/ParallaxInit'
+import MegaMenu from '@/Header/MegaMenu'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
 
   return (
     <html className={cn(raleway.variable, ppEiko.variable)} lang="en" suppressHydrationWarning>
-      <head></head>
       <body>
         <Providers>
           {/* <AdminBar

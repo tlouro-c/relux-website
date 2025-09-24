@@ -11,13 +11,13 @@ export default async function LocationsSection() {
     <section className="py-20">
       <Container>
         <header className="mb-16 flex flex-col items-center md:items-start">
-          <p className="section-badge line-split-animation text-accent">Localizações</p>
+          <p className="section-badge line-split-animation text-accent">Distritos</p>
           <h2 className="section-title line-split-animation">A Localização Ideal Para Si</h2>
         </header>
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <nav className="h-full">
-              <ul className="flex flex-col h-full">
+              <ul className="grid grid-cols-2 md:grid-cols-1 gap-x-2 h-full">
                 {districts.docs.map((district) => (
                   <LocationSectionButton key={district.id} index={1} location={district.name}>
                     {district.name}

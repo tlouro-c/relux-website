@@ -16,8 +16,8 @@ export default function PropertyCardWrapperClient({
       initial={{ opacity: 0, }}
       animate={{ opacity: 1, }}
       transition={{
-        duration: 0.6,
-        delay: index * 0.1,
+        duration: 1,
+        delay: index * 0.0625,
         ease: [0.645, 0.045, 0.355, 1],
       }}
     >

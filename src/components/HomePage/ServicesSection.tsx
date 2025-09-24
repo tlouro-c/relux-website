@@ -49,10 +49,10 @@ export default function ServicesSection() {
   return (
     <section>
       <LineSplitWithRetrigger retriggerKey={activeIndex} />
-      <Container className="relative flex flex-col md:flex-row">
+      <Container className="relative hidden md:flex">
         <div
           ref={target}
-          style={{ height: `calc(${services.length * 200}svh)` }}
+          style={{ height: `calc(${services.length * 120}svh)` }}
           className={`flex-1`}
         >
           <div className="sticky top-0 h-svh flex flex-col justify-center">
@@ -69,9 +69,9 @@ export default function ServicesSection() {
             </motion.div>
           </div>
         </div>
-        <div className="flex-[2] ps-8 h-svh hidden sticky top-0 md:flex flex-col justify-center">
+        <div className="flex-[2] ps-8 h-svh sticky top-0 flex flex-col justify-center">
           <h2 className="text-right section-badge text-accent line-split-animation">Serviços</h2>
-          <ul className="flex flex-col mt-8">
+          <ul className="flex flex-col mt-8 gap-2">
             {services.map((service, index) => (
               <li key={service.title}>
                 <h3
@@ -79,13 +79,31 @@ export default function ServicesSection() {
                     transition: 'color 1.2s cubic-bezier(0.645, 0.045, 0.355, 1)',
                   }}
                   data-delay={0.1}
-                  className={`tracking-tight highlight text-3xl md:text-7xl leading-relaxed transition-colors line-split-animation ${activeIndex === index ? 'text-foreground' : 'text-secondary'}`}
+                  className={`tracking-tight highlight text-5xl lg:text-6xl xl:text-7xl !leading-normal transition-colors line-split-animation ${activeIndex === index ? 'text-foreground' : 'text-secondary'}`}
                 >
                   {service.title}
                 </h3>
               </li>
             ))}
           </ul>
+        </div>
+      </Container>
+      <Container className="relative md:hidden py-16">
+        <h2 className="section-badge ms-auto text-right text-accent line-split-animation mb-16">Serviços</h2>
+        <div className="space-y-12">
+          {services.map((service, index) => (
+            <div key={service.title} className="text-left space-y-4">
+              <ElementRevealFromBottom>{service.icon}</ElementRevealFromBottom>
+              <div className="space-y-4">
+                <h3 className="section-title text-left line-split-animation">
+                  {service.title}
+                </h3>
+                <p className="text-base tracking-tight max-w-md mx-auto line-split-animation">
+                  {service.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </Container>
     </section>

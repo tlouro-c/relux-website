@@ -43,7 +43,9 @@ export default async function PropertiesGrid(props: {
       <>
         <div className="h-[calc(100vh-var(--header-height)-48px)] flex items-center justify-center">
           <p className="text-center text-xl highlight">
-            Nenhum imóvel encontrado.<br/>Por favor, ajuste os filtros.
+            Nenhum imóvel encontrado.
+            <br />
+            Por favor, ajuste os filtros.
           </p>
         </div>
       </>
@@ -51,9 +53,9 @@ export default async function PropertiesGrid(props: {
   }
 
   return (
-    <div className="grid lg:grid-cols-2 2xl:grid-cols-3 min-h-[calc(100vh-var(--header-height)-48px)]">
-      {[...properties, ...properties, ...properties, ...properties].map((property, index) => (
-        <PropertyCardWrapperClient key={property.id + index} index={index}>
+    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
+      {properties.map((property, index) => (
+        <PropertyCardWrapperClient key={property.reference} index={index}>
           <PropertyCard property={property} consultant={property.consultant as Consultant} />
         </PropertyCardWrapperClient>
       ))}

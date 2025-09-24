@@ -38,8 +38,8 @@ export default function InstagramSection() {
     <section className="py-20 overflow-hidden">
       <Container>
         <header className="flex flex-col md:flex-row justify-between items-center mb-16">
-          <div className='mb-4 md:mb-0'>
-            <p className="section-badge line-split-animation">Instagram</p>
+          <div className="mb-4 md:mb-0">
+            <p className="section-badge text-accent line-split-animation">Instagram</p>
             <h2 className="section-title line-split-animation">Acompanhe-nos pelo Instagram</h2>
           </div>
           <ElementRevealFromBottom delay={0.1}>

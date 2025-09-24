@@ -68,7 +68,7 @@ export default function TestimonialsSection() {
             </div>
           </div>
           <div className="flex-1 flex flex-col items-center md:items-end">
-            <p className="text-4xl md:text-6xl text-center md:text-right line-split-animation font-medium tracking-tight line-split-animation text-balance mb-8">
+            <p className="text-4xl md:text-5xl text-center md:text-right line-split-animation font-medium tracking-tight line-split-animation mb-8">
               Nós <span className="highlight">Tornamos</span> Tudo Mais Fácil para Si.
             </p>
             <ElementRevealFromBottom>

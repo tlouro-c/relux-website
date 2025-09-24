@@ -29,11 +29,10 @@ export default function LocationSectionButton({
     window.history.replaceState(null, '', newUrl)
   }
 
-
   return (
     <li>
       <motion.button
-        className={`flex justify-center w-full items-center gap-3 text-lg highlight capitalize py-1 border-b border-foreground/5 ${index === 1 && 'border-t'}`}
+        className={`flex justify-center w-full items-center gap-2 md:text-lg highlight capitalize py-1 border-b border-foreground/5 ${index === 1 && 'border-t'}`}
         whileHover="hovered"
         onClick={updateSearch.bind(null, location)}
       >
@@ -46,7 +45,7 @@ export default function LocationSectionButton({
             hovered: { width: 'auto' },
           }}
           transition={{ duration: 0.3 }}
-          className="relative overflow-hidden h-12 aspect-video w-0 pointer-events-none"
+          className="relative overflow-hidden h-10 md:h-12 aspect-video w-0 pointer-events-none"
         >
           <div className="aspect-video absolute left-0 top-0 h-12">
             <Image

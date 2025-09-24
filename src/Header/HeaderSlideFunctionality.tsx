@@ -1,26 +1,31 @@
 'use client'
 
+import { useMegaMenu } from '@/contexts/MegaMenuContext'
 import React, { useEffect } from 'react'
 
 export default function HeaderSlideFunctionality() {
   const [_previousScrollY, setPreviousScrollY] = React.useState(0)
+  const { isOpen } = useMegaMenu()
 
   useEffect(() => {
     const handleScroll = () => {
       const header = document.querySelector('.site-header')
-      if (!header) return
+      const headerSecondary = document.querySelector('.site-header-secondary')
+      if (!header || !headerSecondary) return
 
       const currentScrollY = window.scrollY
-      
-      setPreviousScrollY((prevScrollY) => {
-        if (currentScrollY <= 0) {
-          // Always show header when at top
-          header.classList.remove('translate-y-[-100%]')
-        } else if (currentScrollY > prevScrollY) {
-          header.classList.add('translate-y-[-100%]')
+
+      setPreviousScrollY(() => {
+        if (currentScrollY > 400) {
+          headerSecondary.classList.remove('translate-y-[-100%]')
+          headerSecondary.classList.remove('pointer-events-none')
         } else {
-          header.classList.remove('translate-y-[-100%]')
+          if (!isOpen) {
+            headerSecondary.classList.add('translate-y-[-100%]')
+            headerSecondary.classList.add('pointer-events-none')
+          }
         }
+
         return currentScrollY
       })
     }

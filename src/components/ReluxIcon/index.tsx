@@ -1,21 +1,15 @@
 import * as React from 'react'
 
-type ReluxIconProps = React.JSX.IntrinsicAttributes &
-  React.SVGProps<SVGSVGElement> & {
-    colorVariant: 1 | 2 | 3
-  }
+type ReluxIconProps = React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
 
 export const ReluxIcon = (props: ReluxIconProps) => {
-  const { colorVariant, ...svgProps } = props
-  const colors = ['#0d1d41', '#e4e1e5', '#ffffff', '#000000']
-
   return (
     <svg
       width={257.111}
       height={266.667}
       viewBox="0 0 257.111 266.667"
       xmlns="http://www.w3.org/2000/svg"
-      {...svgProps}
+      {...props}
     >
       <defs>
         <clipPath clipPathUnits="userSpaceOnUse" id="a">
@@ -30,7 +24,7 @@ export const ReluxIcon = (props: ReluxIconProps) => {
       </defs>
       <g
         style={{
-          fill: colors[colorVariant - 1],
+          fill: 'currentColor',
           fillOpacity: 1,
         }}
       >

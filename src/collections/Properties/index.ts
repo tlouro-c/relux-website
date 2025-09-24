@@ -134,8 +134,8 @@ export const Properties: CollectionConfig<'properties'> = {
               defaultValue: 0,
             },
             {
-              label: 'Garagens',
-              name: 'garages',
+              label: 'Lugares de Estacionamento',
+              name: 'parkingSpaces',
               type: 'number',
               defaultValue: 0,
             },
@@ -297,19 +297,9 @@ export const Properties: CollectionConfig<'properties'> = {
       hasMany: false,
       relationTo: 'consultants',
     },
-
-    ...slugField(),
+    ...slugField('reference'),
   ],
   hooks: {
     afterChange: [revalidateProperty, updateDistrict],
-  },
-  versions: {
-    drafts: {
-      autosave: {
-        interval: 100, // We set this interval for optimal live preview
-      },
-      schedulePublish: true,
-    },
-    maxPerDoc: 10,
   },
 }

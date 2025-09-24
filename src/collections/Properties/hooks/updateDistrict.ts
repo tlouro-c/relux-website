@@ -2,15 +2,8 @@ import { Property } from '@/payload-types'
 import { slugify, unslugify } from '@/utilities/global'
 import { CollectionAfterChangeHook } from 'payload'
 
-export const updateDistrict: CollectionAfterChangeHook<Property> = async ({
-  doc,
-  req: { payload },
-  operation,
-}) => {
-  if (operation !== 'create') {
-    return doc
-  }
-
+export const updateDistrict: CollectionAfterChangeHook<Property> = async ({ doc, req }) => {
+  const { payload } = req
   const districtSlug = slugify(doc.district || '')
 
   if (doc.district) {
@@ -26,19 +19,20 @@ export const updateDistrict: CollectionAfterChangeHook<Property> = async ({
     if (district.totalDocs > 0) {
       const d = district.docs[0]
       const existingProperties = d.properties || []
+      if (existingProperties.includes(doc.id)) {
+        return doc
+      }
       await payload.update({
+        req,
         collection: 'districts',
-        where: {
-          slug: {
-            equals: districtSlug,
-          },
-        },
+        id: d.id,
         data: {
           properties: [...existingProperties, doc.id],
         },
       })
     } else {
       await payload.create({
+        req,
         collection: 'districts',
         data: {
           name: unslugify(districtSlug),

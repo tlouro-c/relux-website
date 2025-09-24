@@ -48,7 +48,12 @@
     --warning: 34 89% 85%;
     --error: 10 100% 86%;
 
-    --header-height: 112px;
+    --header-height: 96px;
+
+    @media (max-width: 768px) {
+      --header-height: 80px;
+    }
+
     --header-color: var(--foreground);
   }
 }

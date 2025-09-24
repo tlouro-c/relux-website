@@ -9,16 +9,23 @@ interface ElementFadeInProps {
   className?: string
   delay?: number
   duration?: number
+  once?: boolean
 }
 
-export const ElementFadeIn = ({ children, style, className = '', delay }: ElementFadeInProps) => {
+export const ElementFadeIn = ({
+  children,
+  once = true,
+  style,
+  className = '',
+  delay,
+}: ElementFadeInProps) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: once, amount: 0.5 }}
       transition={{
-        duration: 1.2,
+        duration: 1,
         delay: delay || 0,
         ease: [0.645, 0.045, 0.355, 1],
       }}

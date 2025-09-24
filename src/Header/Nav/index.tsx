@@ -9,20 +9,21 @@ import { ReluxIcon } from '@/components/ReluxIcon'
 import { Button } from '@/components/Button'
 import { CircleIcon } from 'lucide-react'
 import Link from 'next/link'
+import MegaMenuButton from '../MegaMenu/MegaMenuButton'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || []
-  const initialDelay = 0.6
+  const initialDelay = 0.2
 
   return (
     <nav className="flex gap-3 items-center justify-between h-full px-4 md:px-6 text-[hsl(var(--header-color))]">
       <div className="flex-1 flex justify-start items-center">
         <Link href="/" className="flex items-center">
           <ElementRevealFromBottom delay={initialDelay}>
-            <ReluxIcon className="size-12" colorVariant={3} />
+            <ReluxIcon className="size-12" />
           </ElementRevealFromBottom>
           <div className="ml-3 font-bold text-3xl overflow-hidden hidden md:block">
-            <ElementRevealFromBottom delay={initialDelay + 0.1}>
+            <ElementRevealFromBottom delay={initialDelay + 0.0625}>
               <span>Relux</span>
             </ElementRevealFromBottom>
           </div>
@@ -32,7 +33,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         {navItems.map(({ link }, i) => {
           return (
             <li key={link.label}>
-              <ElementRevealFromBottom delay={initialDelay + 0.1 + i * 0.1}>
+              <ElementRevealFromBottom delay={initialDelay + 0.0625 + i * 0.1}>
                 <Button
                   variant={'link'}
                   size={'link'}
@@ -48,10 +49,16 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
           )
         })}
       </ul>
-      <div className="hidden flex-1 md:flex justify-end items-center">
-        <ElementRevealFromBottom delay={initialDelay + 0.2 + navItems.length * 0.1}>
-          <Button variant={'secondary'}>
-            Entrar em Contacto <CircleIcon className="size-2 stroke-none fill-current" />
+      <div className="flex-1 flex gap-2 justify-end items-center">
+        <div className="md:hidden">
+          <ElementRevealFromBottom delay={initialDelay + 0.0625 * 2}>
+            <MegaMenuButton />
+          </ElementRevealFromBottom>
+        </div>
+
+        <ElementRevealFromBottom delay={initialDelay + 0.0625 * 3}>
+          <Button href="/contacto" size={'sm'} variant={'secondary'}>
+            Contactar <CircleIcon className="size-2 stroke-none fill-current" />
           </Button>
         </ElementRevealFromBottom>
       </div>

@@ -29,7 +29,7 @@ export default function LocationsGrid({ districts }: { districts: District[] }) 
         />
       ))}
       <div className="col-span-1 lg:col-span-2 2xl:col-span-3 flex justify-end mt-4">
-        <Button variant={'secondary'}>
+        <Button variant={'secondary'} href="/imoveis/aveiro">
           Mais Imóveis em{' '}
           <span className="capitalize highlight pb-1 -ms-2">
             {searchParams.get('distrito') || districts[0]?.slug}
