@@ -15,7 +15,13 @@ export default function LocationsGrid({ districts }: { districts: District[] }) 
     const currentDistrict = searchParams.get('distrito') || districts[0]?.slug
     const district = districts.find((d) => d.slug === currentDistrict)
     if (district) {
-      setPropertiesOnDisplay((district.properties as Property[]) || [])
+      setPropertiesOnDisplay(
+        Array.from(
+          new Map(
+            (district.properties as Property[]).map((prop) => [prop.reference, prop]),
+          ).values(),
+        ),
+      )
     }
   }, [searchParams, districts])
 
@@ -23,7 +29,7 @@ export default function LocationsGrid({ districts }: { districts: District[] }) 
     <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-4">
       {propertiesOnDisplay.map((property) => (
         <PropertyCard
-          key={property.id}
+          key={property.reference}
           property={property}
           consultant={property.consultant as Consultant}
         />

@@ -7,14 +7,13 @@ import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { draftMode } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import { ppEiko, raleway } from '@/utilities/fonts'
 import LineSplitInit from '@/components/Animations/LineSplitInit'
 import ParallaxInit from '@/components/Animations/ParallaxInit'
-import MegaMenu from '@/Header/MegaMenu'
+import Script from 'next/script'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -23,17 +22,30 @@ export const viewport: Viewport = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isEnabled } = await draftMode()
-
   return (
-    <html className={cn(raleway.variable, ppEiko.variable)} lang="en" suppressHydrationWarning>
+    <html className={cn(raleway.variable, ppEiko.variable)} lang="pt" suppressHydrationWarning>
+      <head>
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+          page_path: window.location.pathname,
+        });
+      `}
+            </Script>
+          </>
+        )}
+      </head>
       <body>
         <Providers>
-          {/* <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          /> */}
           <Header />
           <main>{children}</main>
           <Footer />

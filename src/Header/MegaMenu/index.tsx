@@ -5,16 +5,17 @@ import { useMegaMenu } from '@/contexts/MegaMenuContext'
 import { motion } from 'motion/react'
 import React, { useEffect } from 'react'
 import { Header } from '@/payload-types'
-import Link from 'next/link'
 import { Button } from '@/components/Button'
 import ElementRevealFromBottom from '@/components/Animations/ElementRevealFromBottom'
 import { ReluxIcon } from '@/components/ReluxIcon'
 import Container from '@/components/Container'
 import { ElementFadeIn } from '@/components/Animations/ElementFadeIn'
+import { useRouter } from 'next/navigation'
 
 export default function MegaMenu({ data }: { data: Header }) {
-  const { isOpen } = useMegaMenu()
+  const { isOpen, toggleMenu } = useMegaMenu()
   const lenis = useLenis()
+  const router = useRouter()
 
   useEffect(() => {
     if (isOpen) {
@@ -23,6 +24,13 @@ export default function MegaMenu({ data }: { data: Header }) {
       lenis?.start()
     }
   }, [isOpen, lenis])
+
+  const handleHomeIconClick = () => {
+    if (isOpen) {
+      toggleMenu()
+    }
+    setTimeout(() => router.push('/#'), 500)
+  }
 
   return (
     <motion.div
@@ -36,7 +44,7 @@ export default function MegaMenu({ data }: { data: Header }) {
     >
       <div className="flex-1 px-4 md:px-6 text-background">
         <div className="h-[var(--header-height)] flex items-center">
-          <Link href="/" className="hidden md:flex items-center">
+          <button onClick={handleHomeIconClick} className="hidden md:flex items-center">
             <ElementRevealFromBottom once={false}>
               <ReluxIcon className="size-12" />
             </ElementRevealFromBottom>
@@ -45,7 +53,7 @@ export default function MegaMenu({ data }: { data: Header }) {
                 <span>Relux</span>
               </ElementRevealFromBottom>
             </div>
-          </Link>
+          </button>
         </div>
       </div>
       <nav className="flex-1 flex flex-col items-start justify-center">

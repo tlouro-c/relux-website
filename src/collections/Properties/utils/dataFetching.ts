@@ -2,17 +2,16 @@ import { getPayload, Where } from 'payload'
 import config from '@/payload.config'
 import { unstable_cache } from 'next/cache'
 import { SortOptionsType } from '@/app/(frontend)/imoveis/[[...slug]]/page'
-import { Property } from '@/payload-types'
 
-export const fetchPropertyBySlug = unstable_cache(
-  async (slug: string) => {
+export const fetchPropertyByReference = unstable_cache(
+  async (reference: string) => {
     const payload = await getPayload({ config })
 
     const property = await payload.find({
       collection: 'properties',
       where: {
-        slug: {
-          equals: slug,
+        reference: {
+          equals: reference,
         },
       },
       depth: 2,
@@ -20,7 +19,7 @@ export const fetchPropertyBySlug = unstable_cache(
 
     return property
   },
-  ['property-by-slug'],
+  ['property-by-reference'],
   {
     tags: ['properties'],
   },

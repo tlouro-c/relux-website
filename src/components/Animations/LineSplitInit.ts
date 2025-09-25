@@ -36,9 +36,9 @@ export default function LineSplitInit() {
         el.style.opacity = '1'
         line.style.transform = 'translateY(120%)'
         line.style.willChange = 'transform'
-        line.style.display = 'inline-block' // ensures line behaves like block for animation
-        wrapper.style.display = 'block' // parent span acts like line container
-        wrapper.style.overflow = 'hidden' // hide overflowing during animation
+        line.style.display = 'inline-block'
+        wrapper.style.display = 'block'
+        wrapper.style.overflow = 'hidden'
       })
 
       // Animate when in view

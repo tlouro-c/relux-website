@@ -1,7 +1,6 @@
 import { Consultant, Property } from '@/payload-types'
 import Link from 'next/link'
 import React from 'react'
-import Image from 'next/image'
 import { BathIcon, BedIcon, CarIcon, ExpandIcon } from 'lucide-react'
 import PropertyImageCarousel from './PropertyImageCarousel'
 
@@ -9,6 +8,7 @@ interface PropertyCardProps {
   property: Pick<
     Property,
     | 'title'
+    | 'reference'
     | 'price'
     | 'transactionType'
     | 'priceVisible'
@@ -20,7 +20,6 @@ interface PropertyCardProps {
     | 'isNew'
     | 'district'
     | 'county'
-    | 'slug'
   >
   consultant?: Pick<Consultant, 'imageUrl' | 'name'>
 }
@@ -49,7 +48,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
   return (
     <div className="p-4 md:p-12 lg:p-16 border-b border-l border-accent/5 border-collapse">
       <Link
-        href={`/imoveis/${property.slug}`}
+        href={`/imovel/${property.reference}`}
         className="relative block group overflow-hidden rounded-lg w-full md:min-w-64 aspect-[4/5] bg-white"
       >
         <article className="h-full flex flex-col">

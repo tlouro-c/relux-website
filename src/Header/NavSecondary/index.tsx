@@ -11,7 +11,7 @@ export default function NavSecondary() {
         <MegaMenuButton />
       </ElementRevealFromBottom>
       <ElementRevealFromBottom once={false}>
-        <Button href="/contacto" size={'sm'} className="relative z-50" variant={'secondary'}>
+        <Button href="/contacto" size={'sm'} className="relative" variant={'secondary'}>
           Contactar <CircleIcon className="size-2 stroke-none fill-current" />
         </Button>
       </ElementRevealFromBottom>

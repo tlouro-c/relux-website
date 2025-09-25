@@ -7,7 +7,7 @@ import { ElementFadeIn } from '../Animations/ElementFadeIn'
 
 export default function About() {
   return (
-    <section className="py-[calc(var(--header-height)+theme(spacing.4))] pb-20 min-h-svh">
+    <section className="pt-[calc(var(--header-height)+theme(spacing.8))] pb-20 min-h-svh">
       <Container>
         <h1 className="text-sm highlight text-center mb-8 md:mb-16 line-split-animation">
           Conheça a Relux
@@ -60,7 +60,7 @@ export default function About() {
                 />
               </div>
             </ElementFadeIn>
-            <div className="hidden md:block mt-16 ps-4 border-l border-accent/10 h-fit">
+            <div className="hidden md:block mt-16 ps-4 border-l-[0.5px] border-foreground h-fit">
               <h2 data-delay={0.3} className="text-sm mb-1 text-accent line-split-animation">
                 Porquê?
               </h2>

@@ -297,7 +297,6 @@ export const Properties: CollectionConfig<'properties'> = {
       hasMany: false,
       relationTo: 'consultants',
     },
-    ...slugField('reference'),
   ],
   hooks: {
     afterChange: [revalidateProperty, updateDistrict],

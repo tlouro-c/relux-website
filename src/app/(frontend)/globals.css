@@ -92,10 +92,6 @@
   text-wrap: wrap;
 }
 
-.line-split-animation .line {
-  display: block;
-}
-
 .instagram-carousel-track {
   display: flex;
   animation: infinite-scroll 30s linear infinite;

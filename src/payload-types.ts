@@ -809,8 +809,6 @@ export interface Property {
   isFeatured?: boolean | null;
   isNew?: boolean | null;
   consultant?: (number | null) | Consultant;
-  slug?: string | null;
-  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1462,8 +1460,6 @@ export interface PropertiesSelect<T extends boolean = true> {
   isFeatured?: T;
   isNew?: T;
   consultant?: T;
-  slug?: T;
-  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }
