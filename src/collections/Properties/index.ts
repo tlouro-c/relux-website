@@ -300,5 +300,6 @@ export const Properties: CollectionConfig<'properties'> = {
   ],
   hooks: {
     afterChange: [revalidateProperty, updateDistrict],
+    
   },
 }

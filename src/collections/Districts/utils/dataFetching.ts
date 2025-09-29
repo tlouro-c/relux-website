@@ -22,7 +22,7 @@ export const fetchDistrictsWithProperties = unstable_cache(
       docs: districts.docs.map((district) => ({
         ...district,
         properties: Array.isArray(district.properties)
-          ? district.properties.slice(0, 3) as Property[]
+          ? district.properties.slice(0, 2) as Property[]
           : null,
       })),
     }
