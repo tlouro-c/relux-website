@@ -748,9 +748,12 @@ export interface Consultant {
   id: number;
   externalId: string;
   name: string;
+  role: string;
   email?: string | null;
+  instagram?: string | null;
   phone?: string | null;
   imageUrl?: string | null;
+  videoUrl?: string | null;
   description?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -767,10 +770,10 @@ export interface Property {
   description?: string | null;
   externalId: string;
   reference: string;
-  propertyType?: string | null;
+  propertyType: 'apartment' | 'house' | 'land' | 'comercial' | 'other';
   transactionType: 'sale' | 'rent';
   status?: string | null;
-  availability?: string | null;
+  availability?: ('available' | 'sold') | null;
   price?: string | null;
   priceVisible?: boolean | null;
   usableArea?: string | null;
@@ -797,15 +800,6 @@ export interface Property {
     | null;
   videoUrl?: string | null;
   virtualTourUrl?: string | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (number | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
   isFeatured?: boolean | null;
   isNew?: boolean | null;
   consultant?: (number | null) | Consultant;
@@ -1401,9 +1395,12 @@ export interface UsersSelect<T extends boolean = true> {
 export interface ConsultantsSelect<T extends boolean = true> {
   externalId?: T;
   name?: T;
+  role?: T;
   email?: T;
+  instagram?: T;
   phone?: T;
   imageUrl?: T;
+  videoUrl?: T;
   description?: T;
   slug?: T;
   slugLock?: T;
@@ -1449,14 +1446,6 @@ export interface PropertiesSelect<T extends boolean = true> {
       };
   videoUrl?: T;
   virtualTourUrl?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  publishedAt?: T;
   isFeatured?: T;
   isNew?: T;
   consultant?: T;

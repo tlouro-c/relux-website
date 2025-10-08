@@ -25,6 +25,30 @@ export const fetchPropertyByReference = unstable_cache(
   },
 )
 
+export const fetchFeaturedProperties = unstable_cache(
+  async () => {
+    const payload = await getPayload({ config })
+
+    const properties = await payload.find({
+      collection: 'properties',
+      where: {
+        isFeatured: {
+          equals: true,
+        },
+      },
+      sort: ['-createdAt'],
+      limit: 6,
+      depth: 1,
+    })
+
+    return properties
+  },
+  ['featured-properties'],
+  {
+    tags: ['properties'],
+  },
+)
+
 export const fetchProperties = unstable_cache(
   async (
     transactionType: string = '',
@@ -34,6 +58,7 @@ export const fetchProperties = unstable_cache(
     minParkingSpaces: number = -1,
     sort: SortOptionsType = 'maisRecentes',
     page: number = 1,
+    propertyType: string | undefined,
   ) => {
     const payload = await getPayload({ config })
 
@@ -41,6 +66,10 @@ export const fetchProperties = unstable_cache(
 
     if (transactionType) {
       where.transactionType = { equals: transactionType === 'arrendar' ? 'rent' : 'sale' }
+    }
+
+    if (propertyType) {
+      where.propertyType = { equals: propertyType }
     }
 
     if (location) {

@@ -32,7 +32,7 @@ export default function TestimonialsSection() {
   return (
     <section className="py-20">
       <Container>
-        <header className="mb-16 flex flex-col items-center md:items-start">
+        <header className="mb-12 flex flex-col items-center md:items-start">
           <h2 className="section-badge text-accent line-split-animation">Resultados</h2>
           <p className="section-title line-split-animation">O que Dizem os Nossos Clientes</p>
         </header>
@@ -93,14 +93,19 @@ function TestimonialCard({
   authorImageUrl: string
 }) {
   return (
-    <div className="shrink-0 px-4">
-      <div className="aspect-[3/2] h-full w-80 md:w-96 border border-foreground/5 rounded-xl bg-secondary p-6 flex flex-col">
+    <div className="shrink-0 p-4">
+      <div
+        className="aspect-[3/2] h-full w-80 md:w-96 border border-foreground/5 rounded-xl bg-secondary p-6 flex flex-col"
+        style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 1px 2px 0px' }}
+      >
         <div className="mb-6 flex items-center">
           {Array.from({ length: 5 }).map((_, index) => (
             <StarIcon key={index} className="w-5 h-5 inline-block fill-orange-600 stroke-none" />
           ))}
         </div>
-        <blockquote className="mb-6 tracking-tight font-medium line-clamp-4 text-sm md:text-base">"{quote}"</blockquote>
+        <blockquote className="mb-6 tracking-tight font-medium line-clamp-4 text-sm md:text-base">
+          "{quote}"
+        </blockquote>
         <div className="flex items-center gap-4 mt-auto">
           <Image
             src={authorImageUrl}

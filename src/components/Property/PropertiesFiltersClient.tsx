@@ -65,7 +65,7 @@ export const SortSelect = memo(function SortSelect({ sortOptions }: { sortOption
     <select
       value={searchParams.get('ordenar') || 'maisRecentes'}
       onChange={handleChange}
-      className="text-xs bg-transparent w-full md:w-32 line-clamp-1 text-muted-foreground hover:text-foreground border border-accent/20 rounded px-2 py-1 outline-none"
+      className="text-xs bg-transparent w-full md:w-36 line-clamp-1 text-muted-foreground hover:text-foreground border border-accent/20 rounded px-2 py-1 outline-none"
     >
       {sortOptions.map((option) => (
         <option key={option.value} value={option.value} className="bg-background text-foreground">
@@ -128,8 +128,8 @@ export const LocationSearch = memo(function LocationSearch({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
-      <Button onClick={updateLocation} size="sm" className="w-full text-xs">
-        Pesquisar
+      <Button onClick={updateLocation} size="sm" className="w-full text-xs opacity-100">
+        Aplicar
       </Button>
     </div>
   )
@@ -188,9 +188,11 @@ export const TransactionTypeButtons = memo(function TransactionTypeButtons({
 export const FilterButtons = memo(function FilterButtons({
   options,
   filterKey,
+  gridCols = 4,
 }: {
   options: FilterOption[]
   filterKey: string
+  gridCols?: number
 }) {
   const router = useRouter()
   const pathname = usePathname()
@@ -215,7 +217,7 @@ export const FilterButtons = memo(function FilterButtons({
   )
 
   return (
-    <div className="flex gap-1">
+    <div className={`grid gap-1`} style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}>
       {options.map((option) => (
         <FilterButton
           key={option.value}
@@ -245,8 +247,8 @@ const FilterButton = memo(function FilterButton({
   return (
     <button
       onClick={handleClick}
-      className={`flex-1 text-xs py-2 px-2 rounded transition-all duration-300 ${
-        Number(searchParams.get(filterKey)) <= option.value
+      className={`flex-1 text-xs py-2 px-2 rounded transition-all duration-300 lining-nums ${
+        Number(searchParams.get(filterKey)) === option.value
           ? 'bg-foreground text-background'
           : 'bg-transparent border border-accent/20 text-foreground hover:border-accent/40'
       }`}

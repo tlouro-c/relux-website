@@ -1,16 +1,23 @@
 import type { CollectionConfig } from 'payload'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField,
-} from '@payloadcms/plugin-seo/fields'
-import { slugField } from '@/fields/slug'
 import { revalidateProperty } from './hooks/revalidateProperty'
 import { updateDistrict } from './hooks/updateDistrict'
+
+export const propertyTypesMap: { [key: string]: string } = {
+  apartment: 'Apartamento',
+  house: 'Moradia',
+  land: 'Terreno',
+  comercial: 'Comercial',
+  other: 'Outro',
+}
+
+export const propertyTypesNumberToKeyMap: { [key: number]: string } = {
+  1: 'apartment',
+  2: 'house',
+  3: 'land',
+  4: 'comercial',
+  5: 'other',
+}
 
 export const Properties: CollectionConfig<'properties'> = {
   labels: {
@@ -72,7 +79,30 @@ export const Properties: CollectionConfig<'properties'> = {
             {
               label: 'Tipo de Imóvel',
               name: 'propertyType',
-              type: 'text',
+              type: 'select',
+              options: [
+                {
+                  label: propertyTypesMap.apartment,
+                  value: 'apartment',
+                },
+                {
+                  label: propertyTypesMap.house,
+                  value: 'house',
+                },
+                {
+                  label: propertyTypesMap.land,
+                  value: 'land',
+                },
+                {
+                  label: propertyTypesMap.comercial,
+                  value: 'comercial',
+                },
+                {
+                  label: propertyTypesMap.other,
+                  value: 'other',
+                },
+              ],
+              required: true,
             },
             {
               label: 'Tipo de Negócio',
@@ -98,7 +128,17 @@ export const Properties: CollectionConfig<'properties'> = {
             {
               label: 'Disponibilidade',
               name: 'availability',
-              type: 'text',
+              type: 'select',
+              options: [
+                {
+                  label: 'Disponível',
+                  value: 'available',
+                },
+                {
+                  label: 'Vendido',
+                  value: 'sold',
+                },
+              ],
             },
             {
               label: 'Preço',
@@ -220,54 +260,7 @@ export const Properties: CollectionConfig<'properties'> = {
           ],
           label: 'Content',
         },
-        {
-          name: 'meta',
-          label: 'SEO',
-          fields: [
-            OverviewField({
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-              imagePath: 'meta.image',
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'media',
-            }),
-
-            MetaDescriptionField({}),
-            PreviewField({
-              // if the `generateUrl` function is configured
-              hasGenerateFn: true,
-
-              // field paths to match the target field for data
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-            }),
-          ],
-        },
       ],
-    },
-    {
-      name: 'publishedAt',
-      type: 'date',
-      admin: {
-        date: {
-          pickerAppearance: 'dayAndTime',
-        },
-        position: 'sidebar',
-      },
-      hooks: {
-        beforeChange: [
-          ({ siblingData, value }) => {
-            if (siblingData._status === 'published' && !value) {
-              return new Date()
-            }
-            return value
-          },
-        ],
-      },
     },
     {
       label: 'Destaque',
@@ -300,6 +293,5 @@ export const Properties: CollectionConfig<'properties'> = {
   ],
   hooks: {
     afterChange: [revalidateProperty, updateDistrict],
-    
   },
 }

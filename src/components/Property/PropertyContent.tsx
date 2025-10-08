@@ -1,164 +1,97 @@
 import React from 'react'
 import { Property } from '@/payload-types'
-import { BathIcon, BedIcon, CarIcon, ExpandIcon } from 'lucide-react'
-import ElementRevealFromBottom from '@/components/Animations/ElementRevealFromBottom'
+import { propertyTypesMap } from '@/collections/Properties'
+import PropertyContentNav from './PropertyContentNav'
 
 interface PropertyContentProps {
   property: Property
-  area: number
 }
 
-export default function PropertyContent({ property, area }: PropertyContentProps) {
+export default function PropertyContent({ property }: PropertyContentProps) {
   return (
-    <div className="space-y-8">
-      {/* Key Features */}
-      <div className="flex flex-wrap gap-3">
-        {property.usableArea && area > 0 && (
-          <div className="flex items-center gap-2 px-4 py-2 bg-secondary border border-accent/5 rounded text-xs font-medium">
-            <ExpandIcon className="size-4 text-foreground" strokeWidth={1.5} />
-            <span>{area} m²</span>
-          </div>
-        )}
-        {property.bedrooms && property.bedrooms > 0 && (
-          <div className="flex items-center gap-2 px-4 py-2 bg-secondary border border-accent/5 rounded text-xs font-medium">
-            <BedIcon className="size-4 text-foreground" strokeWidth={1.5} />
-            <span>{property.bedrooms} Quartos</span>
-          </div>
-        )}
-        {property.wc && property.wc > 0 && (
-          <div className="flex items-center gap-2 px-4 py-2 bg-secondary border border-accent/5 rounded text-xs font-medium">
-            <BathIcon className="size-4 text-foreground" strokeWidth={1.5} />
-            <span>{property.wc} WC</span>
-          </div>
-        )}
-        {property.parkingSpaces && property.parkingSpaces > 0 && (
-          <div className="flex items-center gap-2 px-4 py-2 bg-secondary border border-accent/5 rounded text-xs font-medium">
-            <CarIcon className="size-4 text-foreground" strokeWidth={1.5} />
-            <span>
-              {property.parkingSpaces} Lugar{property.parkingSpaces > 1 ? 'es' : ''}
-            </span>
-          </div>
-        )}
+    <div className="lining-nums">
+      <PropertyContentNav
+        hasVideo={!!property.videoUrl}
+        hasVirtualTour={!!property.virtualTourUrl}
+      />
+
+      <div id="overview" className="my-24">
+        <h2 className="text-2xl md:text-3xl mt-auto font-bold line-split-animation mb-8">
+          Informações Gerais
+        </h2>
+        <h3 className="text-balance font-bold tracking-tight mb-2">Descrição</h3>
+        <p className="leading-relaxed mb-8 line-split-animation">{property.description}</p>
+
+        <ul>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Tipo de Imóvel</h3>
+            <p className="flex-1">{propertyTypesMap[property.propertyType]}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Referência</h3>
+            <p className="flex-1">{property.reference}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Localização</h3>
+            <p className="flex-1">
+              {property.address}, {property.postalCode}, {property.county}, {property.district}
+            </p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Estado</h3>
+            <p className="flex-1">{property.status}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Ano de Construção</h3>
+            <p className="flex-1">{property.year}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Transação</h3>
+            <p className="flex-1">{property.transactionType === 'rent' ? 'Arrendar' : 'Comprar'}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Preço</h3>
+            <p className="flex-1">{property.price}</p>
+          </li>
+        </ul>
       </div>
 
-      {/* Description */}
-      {property.description && (
-        <div>
-          <p className="tracking-tight leading-relaxed mb-8 line-split-animation">
-            {property.description}
-          </p>
-        </div>
-      )}
-
-      {/* Property Details */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold line-split-animation">Informações Gerais</h3>
-          <div className="space-y-3 text-sm">
-            <div className="flex justify-between py-2 border-b border-border">
-              <span className="text-muted-foreground font-medium line-split-animation">
-                Referência
-              </span>
-              <span className="font-semibold line-split-animation">{property.reference}</span>
-            </div>
-            {property.propertyType && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">Tipo</span>
-                <span className="font-semibold line-split-animation">{property.propertyType}</span>
-              </div>
-            )}
-            {property.status && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">
-                  Estado
-                </span>
-                <span className="font-semibold line-split-animation">{property.status}</span>
-              </div>
-            )}
-            {property.year && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">
-                  Ano de Construção
-                </span>
-                <span className="font-semibold line-split-animation">{property.year}</span>
-              </div>
-            )}
-            {property.energyCertificate && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">
-                  Certificado Energético
-                </span>
-                <span className="font-semibold line-split-animation">
-                  {property.energyCertificate}
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold line-split-animation">Áreas & Espaços</h3>
-          <div className="space-y-3 text-sm">
-            {property.usableArea && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">
-                  Área Útil
-                </span>
-                <span className="font-semibold line-split-animation">{area} m²</span>
-              </div>
-            )}
-            {property.grossArea && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">
-                  Área Bruta
-                </span>
-                <span className="font-semibold line-split-animation">
-                  {typeof property.grossArea === 'string'
-                    ? parseFloat(property.grossArea.replace(/\./g, '').replace(',', '.'))
-                    : Number(property.grossArea)}{' '}
-                  m²
-                </span>
-              </div>
-            )}
-            {property.landArea && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">
-                  Área do Terreno
-                </span>
-                <span className="font-semibold line-split-animation">
-                  {typeof property.landArea === 'string'
-                    ? parseFloat(property.landArea.replace(/\./g, '').replace(',', '.'))
-                    : Number(property.landArea)}{' '}
-                  m²
-                </span>
-              </div>
-            )}
-            {property.bedrooms && property.bedrooms > 0 && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">
-                  Quartos
-                </span>
-                <span className="font-semibold line-split-animation">{property.bedrooms}</span>
-              </div>
-            )}
-            {property.wc && property.wc > 0 && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">
-                  Casas de Banho
-                </span>
-                <span className="font-semibold line-split-animation">{property.wc}</span>
-              </div>
-            )}
-            {property.parkingSpaces && property.parkingSpaces > 0 && (
-              <div className="flex justify-between py-2 border-b border-border">
-                <span className="text-muted-foreground font-medium line-split-animation">
-                  Lugares de Estacionamento
-                </span>
-                <span className="font-semibold line-split-animation">{property.parkingSpaces}</span>
-              </div>
-            )}
-          </div>
-        </div>
+      <div id="spaces">
+        <h2 className="text-2xl md:text-3xl mt-auto font-bold line-split-animation mb-8">
+          Áreas e Espaços
+        </h2>
+        <ul>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Área Útil</h3>
+            <p className="flex-1">{property.usableArea}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Área Bruta</h3>
+            <p className="flex-1">{property.grossArea}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Área do Terreno</h3>
+            <p className="flex-1">{property.landArea}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Quartos</h3>
+            <p className="flex-1">{property.bedrooms}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Casas de Banho</h3>
+            <p className="flex-1">{property.wc}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">
+              Lugares de Estacionamento
+            </h3>
+            <p className="flex-1">{property.parkingSpaces}</p>
+          </li>
+          <li className="py-6 border-t flex items-center justify-between">
+            <h3 className="flex-1 text-balance font-bold tracking-tight">Certificado Energético</h3>
+            <p className="flex-1">{property.energyCertificate}</p>
+          </li>
+        </ul>
       </div>
     </div>
   )

@@ -1,47 +1,26 @@
 import React from 'react'
 import Container from '../Container'
-import Image from 'next/image'
 import HeroForm from './HeroForm'
-import HeroImageWrapper from './HeroImageWrapper'
+import HeroVideo from './HeroVideo'
 
 export default function Hero() {
-  const initialDelay = 0.2
+  const initialDelay = 1.5
 
   return (
     <>
-      <section className="relative mb-[-100svh] bg-foreground text-background">
+      <section className="relative mb-[-100svh] bg-secondary text-background">
         <Container className="!max-w-none sticky top-0 h-[100svh] overflow-hidden">
-          <HeroImageWrapper>
-            <Image
-              className="w-full h-full object-cover object-center pointer-events-none contrast-[1.1] brightness-75"
-              src="/images/hero-imovel-agencia-imobiliaria.png"
-              alt="Imóvel - Agência Imobiliária"
-              width={0}
-              height={0}
-              sizes="100vh"
-              priority
-              decoding="sync"
-            />
-          </HeroImageWrapper>
-          <div className="flex-1 relative text-background flex flex-col z-[1] h-full pt-[var(--header-height)] pb-4">
-            <div className="flex-1 flex flex-col md:justify-center py-20">
+          <HeroVideo />
+          <div className="flex-1 relative text-background flex flex-col items-center z-[1] h-full pt-[var(--header-height)] pb-4">
+            <div className="flex-1 flex flex-col py-40">
               <h1
                 data-delay={initialDelay}
-                className="text-4xl md:text-6xl max-w-3xl mb-8 font-medium tracking-tight line-split-animation text-balance"
+                className="text-4xl md:text-6xl lg:text-7xl max-w-3xl mb-12 font-medium tracking-tight line-split-animation text-balance text-center"
               >
                 <span className="highlight">Unimos</span> Pessoas,{' '}
                 <span className="highlight">Concretizamos</span> Sonhos.
               </h1>
               <HeroForm />
-            </div>
-            <div className="items-end flex">
-              <p
-                data-delay={initialDelay}
-                className="max-w-[256px] md:max-w-md w-full md:text-xl tracking-tight line-split-animation font-medium"
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
             </div>
           </div>
         </Container>

@@ -6,7 +6,7 @@ import { ElementFadeIn } from '../Animations/ElementFadeIn'
 
 export default function MissionSection() {
   return (
-    <section className="py-20 bg-foreground relative overflow-hidden">
+    <section className="py-20 bg-foreground relative overflow-hidden rounded-xl">
       <Container className="text-background">
         <div className="max-w-4xl">
           <h2 className="section-badge text-left line-split-animation mb-2">Missão</h2>

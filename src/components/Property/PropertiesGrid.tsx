@@ -5,6 +5,8 @@ import PropertyCard from './PropertyCard'
 import PropertyCardWrapperClient from './PropertyCardWrapperClient'
 import { SortOptionsType } from '@/app/(frontend)/imoveis/[[...slug]]/page'
 import { fetchProperties } from '@/collections/Properties/utils/dataFetching'
+import PropertiesGridClient from './PropertiesGridClient'
+import { propertyTypesNumberToKeyMap } from '@/collections/Properties'
 
 type Params = Promise<{ slug?: string[] }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
@@ -24,7 +26,10 @@ export default async function PropertiesGrid(props: {
     estacionamento = -1,
     ordenar = 'maisRecentes',
     page = 1,
+    tipo = 0,
   } = searchParams
+
+  const propertyType = Number(tipo) > 0 ? propertyTypesNumberToKeyMap[Number(tipo)] : undefined
 
   const properties = (
     await fetchProperties(
@@ -35,6 +40,7 @@ export default async function PropertiesGrid(props: {
       Number(estacionamento),
       ordenar as SortOptionsType,
       Number(page),
+      propertyType,
     )
   ).docs
 
@@ -53,12 +59,12 @@ export default async function PropertiesGrid(props: {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
+    <PropertiesGridClient>
       {properties.map((property, index) => (
         <PropertyCardWrapperClient key={property.reference} index={index}>
           <PropertyCard property={property} consultant={property.consultant as Consultant} />
         </PropertyCardWrapperClient>
       ))}
-    </div>
+    </PropertiesGridClient>
   )
 }

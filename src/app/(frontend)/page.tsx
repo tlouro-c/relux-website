@@ -1,12 +1,10 @@
 import Hero from '@/components/HomePage/Hero'
-import InstagramSection from '@/components/HomePage/IntagramSection'
-import LocationsSection from '@/components/HomePage/LocationsSection'
+import InstagramSection from '@/components/HomePage/InstagramSection'
 import MetricsSection from '@/components/HomePage/MetricsSection'
 import MissionSection from '@/components/HomePage/MissionSection'
-import PageLoader from '@/components/HomePage/PageLoader'
-import ServicesSection from '@/components/HomePage/ServicesSection'
 import React from 'react'
 import TestimonialsSection from '@/components/HomePage/TestimonialsSection'
+import FeaturedPropertiesSection from '@/components/HomePage/FeaturedPropertiesSection'
 
 export default function Homepage() {
   return (
@@ -16,13 +14,12 @@ export default function Homepage() {
           --header-color: var(--background);
         }
       `}</style>
-      <PageLoader />
       <Hero />
-      <div className="relative bg-background">
+      <div className="relative bg-background rounded-t-xl">
         <MetricsSection />
-        <LocationsSection />
+        <FeaturedPropertiesSection />
         <MissionSection />
-        <ServicesSection />
+        {/* <ServicesSection /> */}
         <TestimonialsSection />
         <InstagramSection />
       </div>

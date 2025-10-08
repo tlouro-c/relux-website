@@ -27,18 +27,18 @@ export default function MobileFiltersToggle({ children }: MobileFiltersTogglePro
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen)
-  }
+  const toggle = () => setIsOpen(!isOpen)
 
   return (
     <>
       {/* Toggle Button - Fixed at bottom, only visible when grid is visible */}
-      <div className={`md:hidden fixed bottom-4 left-4 right-4 transition-transform duration-300 px-6 ${isOpen ? 'z-[61]' : 'z-[30]'} ${
-        isVisible ? 'translate-y-0' : 'translate-y-20'
-      }`}>
+      <div
+        className={`md:hidden fixed bottom-4 left-4 right-4 transition-transform duration-300 px-6 ${isOpen ? 'z-[61]' : 'z-[30]'} ${
+          isVisible ? 'translate-y-0' : 'translate-y-20'
+        }`}
+      >
         <Button
-          onClick={toggleMenu}
+          onClick={toggle}
           variant="default"
           size="sm"
           className="w-full bg-foreground/80 backdrop-blur-sm"
@@ -51,14 +51,12 @@ export default function MobileFiltersToggle({ children }: MobileFiltersTogglePro
 
       {/* Mobile Filter Menu - Bottom Sheet */}
       <div
-        className={`md:hidden fixed left-0 right-0 bottom-0 bg-background z-[60] shadow-2xl transition-transform duration-500 ease-in-out transform rounded-t-2xl ${
+        className={`md:hidden fixed left-0 right-0 bottom-0 bg-background z-[60] shadow-2xl transition-transform duration-500 ease-in-out transform rounded-t-2xl overflow-hidden ${
           isOpen ? 'translate-y-0' : 'translate-y-full'
         }`}
       >
         {/* Filters Content */}
-        <div className="p-4 pb-20">
-          {children}
-        </div>
+        <div className="p-4 pb-20 md:hidden">{children}</div>
       </div>
     </>
   )

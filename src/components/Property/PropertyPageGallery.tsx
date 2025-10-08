@@ -21,7 +21,7 @@ export default function PropertyPageGallery({ property }: PropertyPageGalleryPro
               image.imageUrl && (
                 <div
                   key={index}
-                  className="aspect-[3/2] bg-card border border-border rounded overflow-hidden"
+                  className="aspect-[3/2] rounded-xl border border-accent/10 overflow-hidden"
                 >
                   <Image
                     src={image.imageUrl}

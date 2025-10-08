@@ -12,6 +12,7 @@ const nextConfig = {
     remotePatterns: [
       ...[
         NEXT_PUBLIC_SERVER_URL,
+        'http://192.168.1.232:3000',
         'https://images.crm360.pt/users/wg8zn3',
       ].map((item) => {
         const url = new URL(item)

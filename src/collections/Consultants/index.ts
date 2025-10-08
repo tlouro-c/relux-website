@@ -29,8 +29,19 @@ export const Consultants: CollectionConfig<'consultants'> = {
       required: true,
     },
     {
+      label: 'Função',
+      name: 'role',
+      type: 'text',
+      required: true,
+    },
+    {
       label: 'E-mail do/a Consultor(a)',
       name: 'email',
+      type: 'text',
+    },
+    {
+      label: 'Instagram do/a Consultor(a)',
+      name: 'instagram',
       type: 'text',
     },
     {
@@ -41,6 +52,11 @@ export const Consultants: CollectionConfig<'consultants'> = {
     {
       label: 'URL da Imagem',
       name: 'imageUrl',
+      type: 'text',
+    },
+    {
+      label: 'URL do Vídeo de Apresentação',
+      name: 'videoUrl',
       type: 'text',
     },
     {

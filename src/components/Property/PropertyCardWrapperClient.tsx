@@ -12,7 +12,7 @@ export default function PropertyCardWrapperClient({
 }) {
   return (
     <motion.div
-      className="overflow-hidden origin-bottom"
+      className="origin-bottom"
       initial={{ opacity: 0, }}
       animate={{ opacity: 1, }}
       transition={{

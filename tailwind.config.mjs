@@ -93,7 +93,8 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
-        sans: ['var(--font-raleway)', 'var(--font-pp-eiko)'],
+        sans: ['var(--font-raleway)'],
+        serif: ['var(--font-pp-eiko)'],
       },
       keyframes: {
         'accordion-down': {

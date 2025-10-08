@@ -10,13 +10,25 @@ import { Button } from '@/components/Button'
 import { CircleIcon } from 'lucide-react'
 import Link from 'next/link'
 import MegaMenuButton from '../MegaMenu/MegaMenuButton'
+import { usePathname } from 'next/navigation'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+  const [key, setKey] = React.useState(0)
+
+  React.useEffect(() => {
+    if (isHome) setKey((prev) => prev + 1)
+  }, [isHome])
+
   const navItems = data?.navItems || []
-  const initialDelay = 0.2
+  const initialDelay = isHome ? 1.5 : 0
 
   return (
-    <nav className="flex gap-3 items-center justify-between h-full px-4 md:px-6 text-[hsl(var(--header-color))]">
+    <nav
+      key={key}
+      className="flex gap-3 items-center justify-between h-full px-4 md:px-6 text-[hsl(var(--header-color))]"
+    >
       <div className="flex-1 flex justify-start items-center">
         <Link href="/" className="flex items-center">
           <ElementRevealFromBottom delay={initialDelay}>

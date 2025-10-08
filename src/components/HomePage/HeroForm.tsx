@@ -3,10 +3,17 @@
 import React from 'react'
 import { Button } from '../Button'
 import ElementRevealFromBottom from '../Animations/ElementRevealFromBottom'
+import { SearchIcon } from 'lucide-react'
+import { ElementFadeIn } from '../Animations/ElementFadeIn'
 
 export default function HeroForm() {
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
   const formRef = React.useRef<HTMLFormElement>(null)
-  const initialDelay = 0.2
+  const initialDelay = 1.5
 
   const handleClick = (endpoint: string) => {
     if (formRef.current) {
@@ -16,42 +23,41 @@ export default function HeroForm() {
   }
 
   return (
-    <form
-      ref={formRef}
-      method="GET"
-      className="flex flex-col gap-4 md:flex-row items-start md:items-end w-full max-w-4xl mx-auto md:mx-0"
-    >
-      <div className="flex flex-col gap-2 opacity-75 focus-within:opacity-100 transition duration-300">
-        <label
-          data-delay={initialDelay}
-          className="tracking-tight line-split-animation text-sm md:text-base"
-        >
-          Pesquisar
-        </label>
-        <ElementRevealFromBottom delay={initialDelay}>
-          <input
-            className="bg-transparent placeholder:text-background border-b-background tracking-tight rounded-none border-b w-[26ch] outline-none text-xl md:text-2xl"
-            type="text"
-            placeholder="Distrito, Concelho, Código Postal..."
-          />
-        </ElementRevealFromBottom>
-      </div>
-      <div className="space-x-2 flex items-end">
-        <ElementRevealFromBottom delay={initialDelay + 0.0625}>
-          <Button size={'sm'} onClick={() => handleClick('/imoveis/comprar')}>
-            Comprar
-          </Button>
-        </ElementRevealFromBottom>
-        <ElementRevealFromBottom delay={initialDelay + 0.0625 * 2}>
-          <Button
-            size={'sm'}
-            variant={'secondary'}
-            onClick={() => handleClick('/imoveis/arrendar')}
+    <>
+      {mounted && (
+        <ElementFadeIn delay={initialDelay} className="flex justify-center">
+          <form
+            ref={formRef}
+            method="GET"
+            className=" flex gap-4 items-center w-full max-w-2xl mx-auto md:mx-0 bg-gradient-to-r backdrop-blur-sm from-secondary via-secondary/90 to-secondary/50 rounded-full py-2 ps-6 pe-4 text-foreground"
           >
-            Arrendar
-          </Button>
-        </ElementRevealFromBottom>
-      </div>
-    </form>
+            <div className="flex-1 flex flex-col gap-2 opacity-50 focus-within:opacity-100 transition duration-300">
+              <label
+                data-delay={initialDelay}
+                className="tracking-tight line-split-animation text-sm md:text-base sr-only"
+              >
+                Pesquisar
+              </label>
+              <ElementRevealFromBottom delay={initialDelay}>
+                <input
+                  className="bg-transparent placeholder:text-foreground tracking-tight font-medium rounded-none w-[26ch] outline-none text-sm md:text-base"
+                  type="text"
+                  placeholder="Distrito, Concelho, Código Postal..."
+                />
+              </ElementRevealFromBottom>
+            </div>
+            <Button
+              className="rounded-full justify-center items-center"
+              variant={'secondary'}
+              size={'sm'}
+              onClick={() => handleClick('/imoveis')}
+            >
+              <span className="hidden md:inline-block">Pesquisar</span>
+              <SearchIcon className="my-2" />
+            </Button>
+          </form>
+        </ElementFadeIn>
+      )}
+    </>
   )
 }

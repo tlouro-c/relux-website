@@ -27,11 +27,20 @@ export default function PropertyImageCarousel({ images, title }: PropertyImageCa
   }
 
   if (validImages.length === 0) {
-    return <div className="aspect-[3/2] w-full bg-zinc-100 shrink-0" />
+    return (
+      <div
+        className="aspect-[16/10] w-full bg-secondary shrink-0 rounded-xl"
+        style={{
+          boxShadow: 'rgba(0, 0, 0, 0.05) 0px 1px 2px 0px',
+        }}
+      />
+    )
   }
 
   return (
-    <div className="aspect-[3/2] w-full bg-zinc-100 shrink-0 relative overflow-hidden group/image">
+    <div
+      className="aspect-[16/10] w-full bg-secondary shrink-0 relative overflow-hidden group/image rounded-xl"
+    >
       <Image
         src={validImages[currentImageIndex]?.imageUrl!}
         alt={title}

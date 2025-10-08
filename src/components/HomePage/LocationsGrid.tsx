@@ -26,7 +26,7 @@ export default function LocationsGrid({ districts }: { districts: District[] }) 
   }, [searchParams, districts])
 
   return (
-    <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-4">
+    <div className="grid lg:grid-cols-2 gap-4">
       {propertiesOnDisplay.map((property) => (
         <PropertyCard
           key={property.reference}
@@ -34,7 +34,7 @@ export default function LocationsGrid({ districts }: { districts: District[] }) 
           consultant={property.consultant as Consultant}
         />
       ))}
-      <div className="col-span-1 lg:col-span-2 2xl:col-span-3 flex justify-end mt-4">
+      <div className="col-span-1 lg:col-span-2 flex justify-end mt-4">
         <Button variant={'secondary'} href="/imoveis/aveiro">
           Mais Imóveis em{' '}
           <span className="capitalize highlight pb-1 -ms-2">

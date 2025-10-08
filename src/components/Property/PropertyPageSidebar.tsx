@@ -1,130 +1,82 @@
 import React from 'react'
 import { Property, Consultant } from '@/payload-types'
 import Image from 'next/image'
-import { PhoneIcon, MailIcon, UserIcon } from 'lucide-react'
-import { Button } from '../Button'
+import ConsultantReachOutButton from './ConsultantReachOutButton'
+import Link from 'next/link'
+import InlineCal from './InlineCal'
 
 interface PropertyPageSidebarProps {
   property: Property & { consultant?: Consultant }
-  price: string
-  transactionTypeLabel: string
-  area: number
 }
 
-export default function PropertyPageSidebar({
-  property,
-  price,
-  transactionTypeLabel,
-  area,
-}: PropertyPageSidebarProps) {
+export default function PropertyPageSidebar({ property }: PropertyPageSidebarProps) {
   return (
-    <div className="sticky top-[calc(var(--header-height)+2rem)] space-y-6">
-      {/* Price Card */}
-      <div className="bg-secondary rounded p-6 border border-accent/5">
-        <div className="text-center pb-6 border-b-[0.5px] border-foreground">
-          {property.priceVisible ? (
-            <p className="text-2xl md:text-3xl font-light highlight mb-1">{price}</p>
-          ) : (
-            <p className="text-2xl md:text-3xl font-light highlight mb-1">Preço Sob Consulta</p>
-          )}
-          <p className="text-sm tracking-tight">{transactionTypeLabel}</p>
-        </div>
-        <div className="grid grid-cols-3 gap-4 text-center pt-6">
-          {property.bedrooms && property.bedrooms > 0 && (
-            <div>
-              <p className="text-2xl font-semibold">{property.bedrooms}</p>
-              <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
-                Quartos
-              </p>
-            </div>
-          )}
-          {property.wc && property.wc > 0 && (
-            <div>
-              <p className="text-2xl font-semibold">{property.wc}</p>
-              <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
-                WC
-              </p>
-            </div>
-          )}
-          {property.usableArea && area > 0 && (
-            <div>
-              <p className="text-2xl font-semibold">{area}</p>
-              <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
-                m²
-              </p>
-            </div>
-          )}
-        </div>
+    <div className="sticky top-[calc(var(--header-height)+theme(spacing.8))] space-y-8">
+      <div
+        className="bg-white rounded-xl border border-accent/10 overflow-hidden h-[calc(100svh_-_var(--header-height)-theme(spacing.16))] flex flex-col"
+        style={{
+          boxShadow: 'rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px',
+        }}
+      >
+        <h2 className="text-3xl text-balance font-bold tracking-tight p-6 text-center">
+          Reserve uma Visita
+        </h2>
+        <InlineCal />
       </div>
 
-      {/* Consultant Card */}
-      <div className="bg-secondary rounded p-6 border border-accent/5">
-        <h3 className="text-sm font-semibold mb-4 text-center">Consultor Responsável</h3>
+      <span className="my-8 mx-auto block w-fit text-sm text-muted-foreground"> Ou </span>
 
-        {property.consultant ? (
-          <div className="flex flex-col items-center space-y-4">
-            {property.consultant.imageUrl ? (
-              <div className="w-16 h-16 relative rounded-full overflow-hidden">
+      <div
+        style={{
+          boxShadow: 'rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px',
+        }}
+        className=" relative bg-white rounded-xl p-6 border border-accent/10 overflow-hidden"
+      >
+        <h3 className="text-3xl text-balance font-bold tracking-tight mb-8 text-center">
+          Fale Com o Consultor
+        </h3>
+        <div className="flex">
+          <div className="flex-1 shrink-0">
+            <div className="aspect-[2/3] bg-foreground relative rounded-xl overflow-hidden">
+              {property.consultant?.imageUrl && (
                 <Image
                   src={property.consultant.imageUrl}
                   alt={property.consultant.name}
-                  fill
-                  className="object-cover"
-                  sizes="64px"
+                  className="object-cover w-full h-full"
+                  sizes="250px"
+                  height={0}
+                  width={0}
                 />
-              </div>
-            ) : (
-              <div className="w-16 h-16 bg-card rounded-full flex items-center justify-center">
-                <UserIcon className="size-6 text-muted-foreground" strokeWidth={1.5} />
-              </div>
-            )}
-
-            <div className="text-center">
-              <h4 className="font-semibold">{property.consultant.name}</h4>
-              {property.consultant.description && (
-                <p className="text-sm text-muted-foreground mt-1">
-                  {property.consultant.description}
-                </p>
-              )}
-            </div>
-
-            <div className="w-full space-y-2">
-              {property.consultant.email && (
-                <Button
-                  href={`mailto:${property.consultant.email}?subject=Interesse em ${property.title} - Ref: ${property.reference}`}
-                  className="w-full rounded-lg"
-                  variant={'secondary'}
-                >
-                  <MailIcon />
-                  {property.consultant.email}
-                </Button>
-              )}
-
-              {property.consultant.phone && (
-                <Button href={`tel:${property.consultant.phone}`} className="w-full rounded-lg">
-                  <PhoneIcon />
-                  {property.consultant.phone}
-                </Button>
               )}
             </div>
           </div>
-        ) : (
-          <div className="text-center space-y-4">
-            <div className="w-16 h-16 bg-card rounded-full flex items-center justify-center mx-auto">
-              <UserIcon className="size-6 text-muted-foreground" strokeWidth={1.5} />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-3">
-                Para mais informações sobre este imóvel
-              </p>
-              <p className="text-sm font-semibold mb-4">Ref: {property.reference}</p>
-              <button className="w-full bg-foreground text-background py-3 px-4 rounded hover:bg-foreground/90 transition-colors duration-300 font-semibold text-sm">
-                Contactar Agência
-              </button>
-            </div>
+
+          <div className="flex-[2] ps-6 flex flex-col justify-center gap-4 items-center min-h-full">
+            <h4 className="text-lg font-medium">
+              <Link href={`/consultor/${property.consultant?.slug}`}>
+                {property.consultant?.name}
+              </Link>
+            </h4>
+            <ConsultantReachOutButton property={property} />
           </div>
-        )}
+        </div>
       </div>
+
+      {/* <div className="flex flex-col items-center relative bg-secondary rounded-xl p-6 border border-accent/10 overflow-hidden">
+        <h3 className="text-lg font-semibold mb-2 text-balance text-center">Agende uma visita</h3>
+        <p className="text-sm text-muted-foreground mb-4 text-center text-pretty">
+          Veja os horários disponíveis e reserve o seu.
+        </p>
+        <Button
+          size={'sm'}
+          variant={'accent'}
+          data-cal-namespace="30min"
+          data-cal-link="tomas-correia/30min"
+          data-cal-config='{"layout":"month_view"}'
+        >
+          Agendar agora <CalendarIcon />
+        </Button>
+      </div> */}
     </div>
   )
 }
