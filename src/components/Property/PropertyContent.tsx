@@ -10,18 +10,13 @@ interface PropertyContentProps {
 export default function PropertyContent({ property }: PropertyContentProps) {
   return (
     <div className="lining-nums">
-      <PropertyContentNav
-        hasVideo={!!property.videoUrl}
-        hasVirtualTour={!!property.virtualTourUrl}
-      />
-
+      <PropertyContentNav hasVirtualTour={!!property.virtualTourUrl} />
       <div id="overview" className="my-24">
         <h2 className="text-2xl md:text-3xl mt-auto font-bold line-split-animation mb-8">
           Informações Gerais
         </h2>
         <h3 className="text-balance font-bold tracking-tight mb-2">Descrição</h3>
         <p className="leading-relaxed mb-8 line-split-animation">{property.description}</p>
-
         <ul>
           <li className="py-6 border-t flex items-center justify-between">
             <h3 className="flex-1 text-balance font-bold tracking-tight">Tipo de Imóvel</h3>

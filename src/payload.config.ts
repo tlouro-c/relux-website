@@ -87,4 +87,7 @@ export default buildConfig({
     },
     tasks: [],
   },
+  upload: {
+    
+  }
 })

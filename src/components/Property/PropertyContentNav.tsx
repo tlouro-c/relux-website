@@ -6,10 +6,8 @@ import clsx from 'clsx'
 import { useLenis } from 'lenis/react'
 
 export default function PropertyContentNav({
-  hasVideo,
   hasVirtualTour,
 }: {
-  hasVideo: boolean
   hasVirtualTour: boolean
 }) {
   const [activeSection, setActiveSection] = useState<string>('overview')
@@ -23,7 +21,6 @@ export default function PropertyContentNav({
   const navItems = [
     { id: 'overview', label: 'Informações Gerais' },
     { id: 'spaces', label: 'Espaços' },
-    ...(hasVideo ? [{ id: 'video', label: 'Vídeo' }] : []),
     ...(hasVirtualTour ? [{ id: 'virtual-tour', label: 'Tour Virtual' }] : []),
   ]
 
@@ -55,7 +52,7 @@ export default function PropertyContentNav({
 
     sections.forEach((section) => observer.observe(section))
     return () => sections.forEach((section) => observer.unobserve(section))
-  }, [hasVideo, hasVirtualTour])
+  }, [hasVirtualTour])
 
   // Update underline position
   useEffect(() => {

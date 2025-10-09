@@ -11,9 +11,9 @@ export default function PropertyPageVideo({ property }: PropertyPageVideoProps) 
 
   return (
     <div className="mt-24" id="video">
-      <h2 className="text-2xl md:text-3xl mt-auto font-bold line-split-animation mb-8">Vídeo</h2>
+      <h2 className="text-2xl md:text-3xl mt-auto font-bold line-split-animation mb-8 sr-only">Vídeo</h2>
       <ElementFadeIn>
-        <div className="aspect-video rounded-xl border border-accent/10 overflow-hidden bg-secondary">
+        <div className="rounded-xl aspect-[2/1] border border-accent/10 overflow-hidden bg-secondary">
           <video
             preload="metadata"
             controls

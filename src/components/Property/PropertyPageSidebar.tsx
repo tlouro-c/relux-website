@@ -11,7 +11,7 @@ interface PropertyPageSidebarProps {
 
 export default function PropertyPageSidebar({ property }: PropertyPageSidebarProps) {
   return (
-    <div className="sticky top-[calc(var(--header-height)+theme(spacing.8))] space-y-8">
+    <div className="sticky top-0 pt-[calc(var(--header-height)+theme(spacing.8))] space-y-8">
       <div
         className="bg-white rounded-xl border border-accent/10 overflow-hidden h-[calc(100svh_-_var(--header-height)-theme(spacing.16))] flex flex-col"
         style={{

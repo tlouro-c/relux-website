@@ -5,7 +5,7 @@ import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
+import React, { cache, Fragment } from 'react'
 import RichText from '@/components/RichText'
 
 import type { Post } from '@/payload-types'
@@ -14,6 +14,8 @@ import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import Container from '@/components/Container'
+import { CircleIcon } from 'lucide-react'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -49,8 +51,16 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   if (!post) return <PayloadRedirects url={url} />
 
+  const hasCategories =
+    post.categories && Array.isArray(post.categories) && post.categories.length > 0
+
   return (
-    <article className="pt-16 pb-16">
+    <article className="bg-black">
+      <style>{`
+        :root {
+          --header-color: var(--background);
+        }
+      `}</style>
       <PageClient />
 
       {/* Allows redirects for valid pages too */}
@@ -60,16 +70,51 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <PostHero post={post} />
 
-      <div className="flex flex-col items-center gap-4 pt-8">
-        <div className="container">
-          <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
-          {post.relatedPosts && post.relatedPosts.length > 0 && (
-            <RelatedPosts
-              className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-            />
-          )}
-        </div>
+      <div className="flex flex-col bg-background rounded-t-xl items-center py-20 lining-nums">
+        <Container className="flex gap-32 relative">
+          <div className="flex-[2]">
+            <div className="mb-8 flex items-center gap-4 text-xs font-semibold">
+              {hasCategories && (
+                <div className="uppercase">
+                  {post.categories!.map((category, index) => {
+                    if (typeof category === 'object') {
+                      const { title: titleFromCategory } = category
+
+                      const categoryTitle = titleFromCategory || 'Untitled category'
+
+                      const isLast = index === post.categories!.length - 1
+
+                      return (
+                        <Fragment key={index}>
+                          {categoryTitle}
+                          {!isLast && <Fragment>, &nbsp;</Fragment>}
+                        </Fragment>
+                      )
+                    }
+
+                    return null
+                  })}
+                </div>
+              )}
+              {hasCategories && <CircleIcon className="size-1.5 fill-current" />}
+              <div className="text-muted-foreground">
+                {new Date(post.createdAt).toLocaleDateString('pt-PT', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </div>
+            </div>
+            <RichText className="text-foreground" data={post.content} enableGutter={false} />
+          </div>
+
+          <div className="flex-1 sticky top-0 pt-[var(--header-height)] h-screen overflow-hidden">
+            <h2 className="section-title mb-12">Mais Artigos Relux</h2>
+            {post.relatedPosts && post.relatedPosts.length > 0 && (
+              <RelatedPosts docs={post.relatedPosts.filter((post) => typeof post === 'object')} />
+            )}
+          </div>
+        </Container>
       </div>
     </article>
   )

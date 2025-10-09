@@ -29,6 +29,10 @@ import { slugField } from '@/fields/slug'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
+  labels: {
+    singular: 'Artigo',
+    plural: 'Artigos',
+  },
   access: {
     create: authenticated,
     delete: authenticated,
@@ -46,9 +50,10 @@ export const Posts: CollectionConfig<'posts'> = {
       image: true,
       description: true,
     },
+    createdAt: true,
   },
   admin: {
-    hidden: true,
+    hidden: false,
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
@@ -232,6 +237,6 @@ export const Posts: CollectionConfig<'posts'> = {
       },
       schedulePublish: true,
     },
-    maxPerDoc: 50,
+    maxPerDoc: 5,
   },
 }

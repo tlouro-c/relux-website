@@ -15,7 +15,7 @@ export default function Container({
   const Comp = asChild ? Slot : 'div'
 
   return (
-    <Comp className={`max-w-7xl w-full mx-auto px-4 md:px-6 ${className}`} style={style}>
+    <Comp className={`max-w-[1400px] w-full mx-auto px-4 md:px-6 ${className}`} style={style}>
       {children}
     </Comp>
   )

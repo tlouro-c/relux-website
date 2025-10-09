@@ -8,7 +8,7 @@ import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'createdAt'>
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -19,66 +19,47 @@ export const Card: React.FC<{
   title?: string
 }> = (props) => {
   const { card, link } = useClickableCard({})
-  const { className, doc, relationTo, showCategories, title: titleFromProps } = props
+  const { className, doc, relationTo, title: titleFromProps } = props
 
-  const { slug, categories, meta, title } = doc || {}
-  const { description, image: metaImage } = meta || {}
+  const { slug, meta, title, createdAt } = doc || {}
+  const { image: metaImage } = meta || {}
 
-  const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
-  const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
 
   return (
-    <article
-      className={cn(
-        'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
-        className,
-      )}
-      ref={card.ref}
-    >
-      <div className="relative w-full ">
-        {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
-      </div>
-      <div className="p-4">
-        {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4">
-            {showCategories && hasCategories && (
-              <div>
-                {categories?.map((category, index) => {
-                  if (typeof category === 'object') {
-                    const { title: titleFromCategory } = category
-
-                    const categoryTitle = titleFromCategory || 'Untitled category'
-
-                    const isLast = index === categories.length - 1
-
-                    return (
-                      <Fragment key={index}>
-                        {categoryTitle}
-                        {!isLast && <Fragment>, &nbsp;</Fragment>}
-                      </Fragment>
-                    )
-                  }
-
-                  return null
-                })}
-              </div>
-            )}
+    <Link href={href} {...link}>
+      <article
+        className={cn('overflow-hidden hover:cursor-pointer flex items-start', className)}
+        ref={card.ref}
+      >
+        <div className="relative flex-1 flex items-center justify-center aspect-[16/10] rounded-lg overflow-hidden">
+          {!metaImage && <div className="">No image</div>}
+          {metaImage && typeof metaImage !== 'string' && (
+            <Media
+              className="w-full h-full"
+              pictureClassName="h-full w-full"
+              imgClassName="object-cover w-full h-full"
+              resource={metaImage}
+              size="33vw"
+            />
+          )}
+        </div>
+        <div className="ps-4 flex flex-col flex-[2] overflow-hidden">
+          <div className="text-muted-foreground text-xs mb-1">
+            {new Date(createdAt!).toLocaleDateString('pt-PT', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
           </div>
-        )}
-        {titleToUse && (
-          <div className="prose">
-            <h3>
-              <Link className="not-prose" href={href} ref={link.ref}>
-                {titleToUse}
-              </Link>
-            </h3>
-          </div>
-        )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
-      </div>
-    </article>
+          {titleToUse && (
+            <div className="font-semibold tracking-tighter leading-tight line-clamp-2">
+              <h3>{titleToUse}</h3>
+            </div>
+          )}
+        </div>
+      </article>
+    </Link>
   )
 }

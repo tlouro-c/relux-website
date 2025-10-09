@@ -24,6 +24,7 @@ export default async function Page() {
       slug: true,
       categories: true,
       meta: true,
+      createdAt: true,
     },
   })
 
@@ -42,6 +43,7 @@ export default async function Page() {
           currentPage={posts.page}
           limit={12}
           totalDocs={posts.totalDocs}
+          collectionLabels={{ singular: 'Artigo', plural: 'Artigos' }}
         />
       </div>
 
